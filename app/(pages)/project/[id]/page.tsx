@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PROJECTS } from '@/lib/constants';
+import { PROJECTS, Project } from '@/lib/constants';
 import { Github, ExternalLink, ArrowLeft, X, Maximize2, Cpu, Terminal, Box, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
@@ -12,7 +12,7 @@ export default function ProjectPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const params = useParams() as { id: string };
-  const project = PROJECTS.find((p) => p.id === params.id);
+  const project: Project | undefined = PROJECTS.find((p) => p.id === params.id);
 
   // Scroll Progress for that "Leaky" loading bar feel
   const { scrollYProgress } = useScroll();
@@ -28,8 +28,8 @@ export default function ProjectPage() {
 
   if (!project) return notFound();
 
-  const heroImage = project.images[0];
-  const galleryImages = project.images.slice(1);
+  const heroImage: string = project.images[0];
+  const galleryImages: string[] = project.images.slice(1);
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
@@ -39,7 +39,7 @@ export default function ProjectPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#050505] text-zinc-400 font-mono selection:bg-blue-500/30 overflow-x-hidden">
+    <main className="min-h-screen  text-zinc-400 font-mono selection:bg-blue-500/30 overflow-x-hidden">
       
       {/* 1. SYSTEM LOADING BAR */}
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-blue-600 z-[70] origin-left" style={{ scaleX }} />
@@ -47,14 +47,14 @@ export default function ProjectPage() {
       {/* 2. LEAKY NAV */}
       <nav className="fixed top-0 w-full z-[60] border-b border-white/5 bg-[#050505]/90 backdrop-blur-md px-4 py-3">
         <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] tracking-widest">
-          <Link href="/#work" className="flex items-center gap-2 hover:text-white transition-colors group">
+          <Link href="/" className="flex items-center gap-2 hover:text-white transition-colors group">
             <span className="text-zinc-700">{"<"}</span> [ ROOT_DIR ]
           </Link>
           <div className="flex items-center gap-6">
             <span className="hidden md:inline text-zinc-800 tracking-tighter">SYS/LOG/PRJ_{project.id.toUpperCase()}</span>
             <div className="flex gap-4">
-               <a href={project.github} target="_blank" className="text-zinc-500 hover:text-white uppercase">{"{"} GitHub {"}"}</a>
-               <a href={project.link} target="_blank" className="text-blue-500 hover:text-blue-400 uppercase">{"{"} Live {"}"}</a>
+               <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white uppercase">{"{"} GitHub {"}"}</a>
+               <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400 uppercase">{"{"} Live {"}"}</a>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function ProjectPage() {
           className="object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-1000"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#050505] to-transparent opacity-60" />
         <div className="absolute bottom-12 left-6 md:left-12 space-y-4">
             <div className="flex items-center gap-3">
                 <span className="text-[10px] text-blue-500 border border-blue-500/20 px-2 py-0.5 bg-blue-500/5 uppercase font-bold tracking-widest">
@@ -120,7 +120,9 @@ export default function ProjectPage() {
                     <div key={category}>
                         <p className="text-[8px] text-zinc-800 uppercase mb-2">_{category}</p>
                         <div className="flex flex-wrap gap-2">
-                            {skills.map(s => <span key={s} className="text-[11px] text-zinc-400 bg-zinc-900 border border-white/5 px-2 py-1">{s}</span>)}
+                            {(skills as string[]).map((s: string) => (
+                                <span key={s} className="text-[11px] text-zinc-400 bg-zinc-900 border border-white/5 px-2 py-1">{s}</span>
+                            ))}
                         </div>
                     </div>
                 ))}
@@ -136,10 +138,10 @@ export default function ProjectPage() {
                     <h3 className="text-2xl font-bold text-white uppercase tracking-tighter">Asset_Visualizer</h3>
                 </div>
                 <div className="flex gap-2">
-                    <button onClick={() => scrollCarousel('left')} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors">
+                    <button onClick={() => scrollCarousel('left')} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
                         <ChevronLeft className="w-4 h-4 text-zinc-400" />
                     </button>
-                    <button onClick={() => scrollCarousel('right')} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors">
+                    <button onClick={() => scrollCarousel('right')} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
                         <ChevronRight className="w-4 h-4 text-zinc-400" />
                     </button>
                 </div>
@@ -149,7 +151,7 @@ export default function ProjectPage() {
                 ref={carouselRef}
                 className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8 -mx-6 px-6 cursor-grab active:cursor-grabbing"
             >
-                {galleryImages.map((img, i) => (
+                {galleryImages.map((img: string, i: number) => (
                     <motion.div 
                         key={i}
                         whileHover={{ y: -5 }}
@@ -181,7 +183,7 @@ export default function ProjectPage() {
                     <span className="text-[10px] uppercase text-zinc-600 tracking-[0.4em]">03 // Deployment_Outcomes</span>
                 </div>
                 <ul className="space-y-8">
-                    {project.outcomes.map((outcome, i) => (
+                    {project.outcomes.map((outcome: string, i: number) => (
                         <li key={i} className="flex gap-6 items-start group">
                             <span className="text-blue-600 font-bold text-lg mt-1 group-hover:translate-x-1 transition-transform">↳</span>
                             <p className="text-xl md:text-3xl text-zinc-300 font-bold tracking-tighter italic">
@@ -212,7 +214,7 @@ export default function ProjectPage() {
       </AnimatePresence>
 
       <footer className="py-24 border-t border-zinc-900 text-center">
-         <Link href="/#work" className="text-[10px] text-zinc-800 hover:text-blue-500 transition-all uppercase tracking-[1em]">
+         <Link href="/" className="text-[8px] sm:text-[10px] text-800 hover:text-blue-500 transition-all uppercase tracking-[1em]">
             [ RE_INITIALIZE_MANIFEST ]
          </Link>
       </footer>

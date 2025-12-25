@@ -32,7 +32,7 @@ export default function Portfolio() { // Setup a state to track if the component
             {/* Your content here */}
             <div className="min-h-screen  text-zinc-400 selection:bg-white selection:text-black">
                 <Navbar/>
-                <main className="mx-auto max-w-5xl px-6 pt-32 pb-20">
+                <main className="mx-auto max-w-5xl px-3 md:px-6 pt-24 sm:pt-32 pb-20">
                     <HeroSection/>
                     <AboutSection/>
                     <GithubSection/>
