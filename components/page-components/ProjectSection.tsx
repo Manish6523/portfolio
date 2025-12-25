@@ -1,11 +1,8 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Badge } from '../ui/badge';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import ProjectCard from '../ProjectCard';
+
 
 const PROJECTS = [
   {
@@ -36,85 +33,29 @@ const PROJECTS = [
 
 export default function ProjectSection() {
   return (
-    <section id="work" className=" space-y-32 mb-32">
-        <div className="pt-12 border-t border-white/5">
-        <h3 className="text-sm font-mono text-zinc-600 mb-12 uppercase tracking-widest ">
-          Projects
-        </h3>
+    <section id="work" className="mb-32 font-mono">
+      <div className="pt-12 border-t border-white/5">
+        
+        {/* Section Header */}
+        <div className="flex justify-between items-end mb-16">
+          <div className="space-y-1">
+            <h3 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
+              05 // Production_Deployments
+            </h3>
+            <h3 className="text-2xl font-bold text-white tracking-tighter">
+              Deployment_History.log
+            </h3>
+          </div>
+          <div className="text-right hidden md:block text-[9px] text-zinc-800 uppercase tracking-widest">
+            Total_Entries: {PROJECTS.length}
+          </div>
+        </div>
 
-      <div className="md:space-y-30 space-y-16">
-        {PROJECTS.map((project, index) => (
-          <motion.div 
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="group relative"
-          >
-            {/* Project Hero Wrapper */}
-            <div className="flex flex-col lg:flex-row md:gap-12 gap-5 items-center">
-              
-              {/* Image Side - 60% Width */}
-              <div className="w-full lg:w-3/5 overflow-hidden rounded-xl bg-zinc-900 border border-white/5 relative aspect-video group">
-                <Link href={`/project/${project.id}`}>
-                  <Image 
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                </Link>
-                
-                {/* Floating Tech Stack on Image */}
-                <div className="absolute bottom-6 left-6 flex gap-2">
-                  {project.tech.map(t => (
-                    <span key={t} className="px-2 py-1 bg-black/50 backdrop-blur-md border border-white/10 text-[9px] font-mono text-white/70 rounded">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Content Side - 40% Width */}
-              <div className="w-full lg:w-2/5 space-y-6">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <span className="text-zinc-700 font-mono text-xs">0{index + 1}</span>
-                    <Badge variant="outline" className="text-[10px] border-zinc-800 text-zinc-500">
-                      {project.status}
-                    </Badge>
-                  </div>
-                  <h3 className="text-4xl font-bold tracking-tighter text-white">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
-                    {project.role} @ {project.client}
-                  </p>
-                </div>
-
-                <p className="text-zinc-400 text-sm leading-relaxed max-w-md">
-                  {project.description}
-                </p>
-
-                <div className="pt-4 flex items-center gap-6">
-                  <Link 
-                    href={`/project/${project.id}`}
-                    className="flex items-center gap-2 text-white font-bold text-sm hover:gap-4 transition-all"
-                  >
-                    View Project <ArrowRight className="w-4 h-4 text-blue-500" />
-                  </Link>
-                  <div className="h-px w-12 bg-zinc-800" />
-                  <div className="flex gap-4">
-                    <a href={project.github} target='_blank' className="text-zinc-600 hover:text-white transition-colors"><Github className="w-4 h-4" /></a>
-                    <a href={project.link} target='_blank' className="text-zinc-600 hover:text-white transition-colors"><ExternalLink className="w-4 h-4" /></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+        <div className="space-y-12 md:space-y-32">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard project={project} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );

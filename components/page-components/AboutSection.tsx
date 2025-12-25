@@ -2,6 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
+import SpotlightCard from '@/components/SpotlightCard';
+
 
 export default function AboutSection() {
   return (
@@ -18,7 +20,7 @@ export default function AboutSection() {
         </h3>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 relative">
+      <SpotlightCard className="max-w-6xl mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
 
           {/* LEFT COLUMN */}
@@ -132,7 +134,7 @@ export default function AboutSection() {
 
           </div>
         </div>
-      </div>
+      </SpotlightCard>
     </section>
   );
 }

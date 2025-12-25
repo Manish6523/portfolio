@@ -73,8 +73,7 @@ export default function TechnicalSection() {
                 direction="left"
                 logoHeight={32}
                 gap={80}
-                fadeOut
-                fadeOutColor="#050505"
+                
               />
             </div>
           </div>
@@ -92,8 +91,7 @@ export default function TechnicalSection() {
                 direction="right"
                 logoHeight={32}
                 gap={80}
-                fadeOut
-                fadeOutColor="#050505"
+                
               />
             </div>
           </div>
@@ -111,8 +109,6 @@ export default function TechnicalSection() {
                 direction="left"
                 logoHeight={32}
                 gap={80}
-                fadeOut
-                fadeOutColor="#050505"
               />
             </div>
           </div>
@@ -120,8 +116,10 @@ export default function TechnicalSection() {
         </div>
 
         {/* Leaky Footer Metadata */}
-        <div className="mt-12 flex justify-between text-[9px] text-zinc-800 uppercase tracking-widest border-b border-zinc-900 pb-2">
-            <span>[ Total_Modules: 19 ]</span>
+        <div className="mt-12 flex justify-between text-[9px] text-zinc-800 uppercase tracking-widest ">
+            <span>
+              [ Total_Modules: {frontendLogos.length + backendLogos.length + toolingLogos.length} ]
+            </span>
             <span>[ Lifecycle: Active ]</span>
         </div>
       </div>

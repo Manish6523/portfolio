@@ -3,6 +3,7 @@
 import React from 'react';
 import {GitHubCalendar} from 'react-github-calendar';
 import { motion } from 'framer-motion';
+import SpotlightCard from './SpotlightCard';
 
 export default function GithubSection() {
   return (
@@ -39,7 +40,7 @@ export default function GithubSection() {
         <div className="absolute -bottom-2 -left-2 size-4 border-b border-l border-zinc-700" />
         <div className="absolute -bottom-2 -right-2 size-4 border-b border-r border-zinc-700" />
 
-        <div className="relative flex justify-center grayscale contrast-125 opacity-60 group-hover:opacity-100 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700 ease-in-out">
+        <SpotlightCard className="relative flex justify-center transition-all duration-700 ease-in-out">
           <GitHubCalendar 
             username="Manish6523"
             fontSize={12}
@@ -50,7 +51,7 @@ export default function GithubSection() {
               dark: ['#111111', '#064e3b', '#065f46', '#059669', '#10b981'],
             }}
           />
-        </div>
+        </SpotlightCard>
       </div>
       
       {/* Footer System Details */}
