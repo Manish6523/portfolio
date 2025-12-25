@@ -99,7 +99,14 @@ const HomeSection = () => {
 
                 <div className="relative size-72 ">
                     <div className="absolute inset-0 border border-white/5 rounded-full scale-125"></div>
-                    <Image src="/me.png" alt="Manish Sharma" draggable='false' fill className="rounded-full object-cover border-8 border-zinc-900/50 grayscale transition-all duration-700 hover:grayscale-0"/>
+                    <Image 
+                        src="/me.png"
+                        alt="Manish Sharma"
+                        draggable="false"
+                        fill
+                        className="rounded-full object-cover border-8 border-zinc-900/50 grayscale transition-all duration-700 hover:grayscale-0"
+                        style={{ transform: "scaleX(-1)" }}
+                    />
                 </div>
             </section>
     )

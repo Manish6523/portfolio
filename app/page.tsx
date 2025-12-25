@@ -34,7 +34,7 @@ export default function Portfolio() {
   duration={400}
 >
   {/* Your content here */}
-    <div className="min-h-screen bg-[#050505] text-zinc-400 selection:bg-white selection:text-black">
+    <div className="min-h-screen  text-zinc-400 selection:bg-white selection:text-black">
       
       {/* Navbar */}
         <Navbar />

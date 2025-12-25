@@ -3,6 +3,7 @@
 import React from 'react';
 import {GitHubCalendar} from 'react-github-calendar';
 import { motion } from 'framer-motion';
+import SpotlightCard from './SpotlightCard';
 
 export default function GithubSection() {
   return (
@@ -21,15 +22,9 @@ export default function GithubSection() {
             Open Source & Contribution Activity
           </h3>
         </div>
-        {/* <div className="flex flex-col items-end">
-          <span className="text-2xl font-bold text-green-500 tracking-tighter">158</span>
-          <span className="text-[9px] font-mono uppercase text-zinc-600 tracking-widest">
-            Commits this year
-          </span>
-        </div> */}
       </div>
 
-      <div className="p-6 bg-zinc-950 border border-white/5 rounded-2xl overflow-hidden group">
+      <SpotlightCard className="p-6 bg-zinc-950 border border-white/5 rounded-2xl overflow-hidden group">
         <div className="flex justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100">
           <GitHubCalendar 
             username="Manish6523" // Replace with your actual username
@@ -43,7 +38,7 @@ export default function GithubSection() {
             }}
           />
         </div>
-      </div>
+      </SpotlightCard>
       
       {/* <p className="mt-4 text-[10px] font-mono text-zinc-600 uppercase tracking-widest text-right">
         Live Data Synced via GitHub API
