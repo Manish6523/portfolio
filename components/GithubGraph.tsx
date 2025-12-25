@@ -14,7 +14,7 @@ export default function GithubSection() {
       className="pt-12 border-t border-white/5 mb-32 font-mono"
     >
       {/* Header with System Numbering */}
-      <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start mb-8 gap-4">
         <div className="space-y-1">
           <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600">
             03 // Activity_Log
@@ -23,16 +23,16 @@ export default function GithubSection() {
             Engineering_Consistency.exe
           </h3>
         </div>
-        <div className="text-right">
+        <div className="text-left md:text-right">
             <p className="text-[9px] text-zinc-700 uppercase tracking-widest">Data_Source: GitHub_API_V3</p>
             <p className="text-[10px] text-blue-500">{"[ STATUS: SYNCED ]"}</p>
         </div>
       </div>
 
       {/* The "Leaky" Container */}
-      <div className="relative group p-6 bg-[#050505] border border-zinc-900 rounded-sm overflow-dden">
+      <div className="relative group p-0 md:p-6 bg-[#050505] border border-zinc-900 rounded-3xl md:rounded-sm overflow-dden">
         {/* Decorative Grid Background */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[length:20px_20px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
+        <div className="absolute rounded-3xl md:rounded-sm  inset-0 opacity-[0.03] pointer-events-none bg-[length:20px_20px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
 
         {/* Frame Markers */}
         <div className="absolute -top-2 -left-2 size-4 border-t border-l border-zinc-700" />

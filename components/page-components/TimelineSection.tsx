@@ -2,29 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { TIMELINE } from '@/lib/constants';
 
-const EXPERIENCE = [
-  {
-    period: "2025 — PRESENT",
-    title: "Web Development Intern",
-    company: "Karmadude IT Solutions",
-    description: "Architecting secure authentication infrastructures and interactive data visualization systems for corporate ecosystems.",
-    details: [
-      "Implemented multi-factor authentication flows (OTP & OAuth).",
-      "Developed high-performance dashboards for order lifecycle tracking."
-    ]
-  },
-  {
-    period: "2022 — 2026",
-    title: "B. Tech in Computer Engineering",
-    company: "Gandhinagar Institute of Technology",
-    description: "Focused on core engineering principles and advanced system architecture with an execution-driven mindset.",
-    details: [
-      "Current Academic Standing: 8.26 / 10.0 CGPA",
-      "Specialization: Full-Stack Systems & AI Logic"
-    ]
-  }
-];
 
 const TimelineSection = () => {
   return (
@@ -35,7 +14,7 @@ const TimelineSection = () => {
         </h2>
 
         <div className="space-y-20">
-          {EXPERIENCE.map((item, index) => (
+          {TIMELINE.map((item, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, x: -10 }}
