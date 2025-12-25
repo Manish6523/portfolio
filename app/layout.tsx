@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import './globals.css';
+import CustomCursor from "@/components/ui/CustomCursor";
 
 // app/layout.tsx
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
+          <CustomCursor />
           {children}
         </ThemeProvider>
       </body>
