@@ -1,8 +1,5 @@
 'use client';
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink} from "lucide-react";
-import HomeSection from "@/components/page-components/HomeSection";
 import TechnicalSection from "@/components/page-components/TechnicalSection";
 import { useEffect, useState } from "react";
 import ClickSpark from "@/components/react-bits/ClickSpark";
@@ -10,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import ProjectSection from "@/components/page-components/ProjectSection";
 import AboutSection from "@/components/page-components/AboutSection";
 import GithubSection from "@/components/GithubGraph";
+import HeroSection from "@/components/page-components/HeroSection";
 
 export default function Portfolio() {
   // Setup a state to track if the component has mounted in the browser
@@ -35,26 +33,13 @@ export default function Portfolio() {
 >
   {/* Your content here */}
     <div className="min-h-screen  text-zinc-400 selection:bg-white selection:text-black">
-      
-      {/* Navbar */}
         <Navbar />
-
       <main className="mx-auto max-w-5xl px-6 pt-32 pb-20">
-        
-        {/* Hero Section */}
-        <HomeSection />
-
-        {/* About Section */}
+        <HeroSection />
         <AboutSection />
-        
-        {/* Github Section */}
         <GithubSection />
-        
-        {/* Technical Section */}
         <TechnicalSection />
-
-      {/* Project Section */}
-      <ProjectSection />
+        <ProjectSection />
 
         {/* Experience Timeline */}
         <section className="mb-32">

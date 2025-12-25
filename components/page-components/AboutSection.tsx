@@ -11,7 +11,7 @@ export default function AboutSection() {
     >
       <div className="space-y-1 mb-8">
         <h2 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
-          01 // About Me
+          01 // About_Me
         </h2>
         <h3 className="text-xl font-bold text-white tracking-tighter">
           The story behind the code
@@ -22,7 +22,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
 
           {/* LEFT COLUMN */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="lg:col-span-5 space-y-8 md:mx-0 mx-auto">
             <div className="relative group p-1 bg-zinc-900/50 rounded-sm inline-block">
               <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
               <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-zinc-700 group-hover:border-blue-500/50 transition-colors" />

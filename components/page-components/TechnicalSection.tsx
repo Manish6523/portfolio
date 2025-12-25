@@ -1,5 +1,13 @@
+"use client";
+
+import React from 'react';
 import LogoLoop from '@/components/react-bits/LogoLoop';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiBun, SiGit, SiPostman, SiAmazonwebservices, SiVercel, SiOpenai, SiFramer, SiRedux, SiFigma, SiNodedotjs, SiExpress, SiSupabase, SiPostgresql, SiMongodb, SiJsonwebtokens } from 'react-icons/si';
+import { 
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiBun, SiGit, 
+  SiPostman, SiAmazonwebservices, SiVercel, SiOpenai, SiFramer, 
+  SiRedux, SiFigma, SiNodedotjs, SiExpress, SiSupabase, SiPostgresql, 
+  SiMongodb, SiJsonwebtokens 
+} from 'react-icons/si';
 
 const frontendLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
@@ -29,63 +37,92 @@ const toolingLogos = [
   { node: <SiBun />, title: "Bun", href: "https://bun.sh" }
 ];
 
-
-
 export default function TechnicalSection() {
   return (
-    <section className="mb-32">
+    <section className="mb-32 font-mono">
       <div className="pt-12 border-t border-white/5">
-        <h3 className="text-sm font-mono text-zinc-600 mb-12 uppercase tracking-widest ">
-          Architectural Ecosystem
-        </h3>
+        
+        {/* Section Header with Metadata */}
+        <div className="flex justify-between items-end mb-12">
+          <div className="space-y-1">
+            <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600">
+              04 // Architectural_Ecosystem
+            </h2>
+            <h3 className="text-2xl font-bold text-white tracking-tighter">
+              Integrated_Stack.manifest
+            </h3>
+          </div>
+          <div className="hidden md:block text-right">
+             <span className="text-[9px] text-zinc-800 uppercase tracking-widest leading-none block">Scanning Dependencies...</span>
+             <span className="text-[9px] text-blue-900 uppercase tracking-widest leading-none block">All modules stable</span>
+          </div>
+        </div>
 
-        <h3 className="text-[10px] font-mono text-zinc-600 mb-4 uppercase tracking-[0.2em] font-bold">
-          Frontend utils
-        </h3>
+        <div className="space-y-10">
+          
+          {/* Row 1: Frontend */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 group">
+              <span className="text-zinc-800 text-[10px] whitespace-nowrap">0xF1 // FRONTEND</span>
+              <div className="h-px w-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
+            </div>
+            <div className="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+              <LogoLoop
+                logos={frontendLogos}
+                speed={40}
+                direction="left"
+                logoHeight={32}
+                gap={80}
+                fadeOut
+                fadeOutColor="#050505"
+              />
+            </div>
+          </div>
 
-        <div className="space-y-8 overflow-hidden">
-          {/* Row 1: Frontend - Moves Left */}
-          <LogoLoop
-            logos={frontendLogos}
-            speed={40}
-            direction="left"
-            logoHeight={40}
-            gap={60}
-            hoverSpeed={0}
-            scaleOnHover
-            fadeOut
-            fadeOutColor="#050505"
-          />
+          {/* Row 2: Backend */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 group">
+              <span className="text-zinc-800 text-[10px] whitespace-nowrap">0xB2 // BACKEND</span>
+              <div className="h-px w-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
+            </div>
+            <div className="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+              <LogoLoop
+                logos={backendLogos}
+                speed={30}
+                direction="right"
+                logoHeight={32}
+                gap={80}
+                fadeOut
+                fadeOutColor="#050505"
+              />
+            </div>
+          </div>
 
-          {/* Row 2: Backend - Moves Right (Inverse Direction) */}
-          <h3 className="text-[10px] font-mono text-zinc-600 mb-4 uppercase tracking-[0.2em] font-bold">          Backend utils
-        </h3>
-          <LogoLoop
-            logos={backendLogos}
-            speed={30}
-            direction="right"
-            logoHeight={40}
-            gap={60}
-            hoverSpeed={0}
-            scaleOnHover
-            fadeOut
-            fadeOutColor="#050505"
-          />
+          {/* Row 3: Tooling */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 group">
+              <span className="text-zinc-800 text-[10px] whitespace-nowrap">0xT3 // TOOLING</span>
+              <div className="h-px w-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
+            </div>
+            <div className="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+              <LogoLoop
+                logos={toolingLogos}
+                speed={50}
+                direction="left"
+                logoHeight={32}
+                gap={80}
+                fadeOut
+                fadeOutColor="#050505"
+              />
+            </div>
+          </div>
+          
+        </div>
 
-          {/* Row 3: AI & Tooling - Moves Left (Slower) */}
-          <h3 className="text-[10px] font-mono text-zinc-600 mb-4 uppercase tracking-[0.2em] font-bold">          Tools
-        </h3>
-          <LogoLoop
-            logos={toolingLogos}
-            speed={50}
-            direction="left"
-            logoHeight={40}
-            gap={60}
-            hoverSpeed={0}
-            scaleOnHover
-            fadeOut
-            fadeOutColor="#050505"
-          />
+        {/* Leaky Footer Metadata */}
+        <div className="mt-12 flex justify-between text-[9px] text-zinc-800 uppercase tracking-widest border-b border-zinc-900 pb-2">
+            <span>[ Total_Modules: 19 ]</span>
+            <span>[ Lifecycle: Active ]</span>
         </div>
       </div>
     </section>
