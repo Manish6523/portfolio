@@ -26,7 +26,7 @@ export default function HeroSection() {
 
                 {/* 2. Headline: Bold & Leaky */}
                 <div className="space-y-2">
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white leading-[0.85]">
+                    <h1 className="text-4xl md:text-7xl font-bold tracking-tighter text-white leading-[0.85]">
                         <SplitText text="Manish Sharma." duration={2} className="inline-block" />
                         <br />
                         <span className="text-zinc-700 italic">0x_FullStack</span>
