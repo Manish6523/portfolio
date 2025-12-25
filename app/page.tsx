@@ -10,6 +10,7 @@ import GithubSection from "@/components/GithubGraph";
 import HeroSection from "@/components/page-components/HeroSection";
 import TimelineSection from "@/components/page-components/TimelineSection";
 import ContactSection from "@/components/page-components/ContactSection";
+import AIAgent  from "@/components/page-components/AIAgent";
 
 
 export default function Portfolio() { // Setup a state to track if the component has mounted in the browser
@@ -42,16 +43,7 @@ export default function Portfolio() { // Setup a state to track if the component
                     <ProjectSection/>
                     <TimelineSection/> {/* Contact CTA */}
                     <ContactSection/>
-
-                    {/* <section className="py-32 border-t border-white/5 text-center">
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tighter">Let's build something
-                            <br/>
-                            together.</h2>
-                        <p className="text-zinc-500 mb-12 max-w-md mx-auto">Currently open to remote roles and high-impact freelance projects.</p>
-                        <Button size="lg" className="rounded-full bg-white text-black hover:bg-zinc-200 px-12 font-bold tracking-tighter">
-                            GET IN TOUCH
-                        </Button>
-                    </section> */}
+                    <AIAgent/>
                 </main>
 
                 <footer className="py-12 border-t border-white/5 text-center">

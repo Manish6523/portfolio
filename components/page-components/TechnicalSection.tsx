@@ -2,6 +2,7 @@
 
 import React from 'react';
 import LogoLoop from '@/components/react-bits/LogoLoop';
+import { motion } from 'framer-motion';
 import { 
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiBun, SiGit, 
   SiPostman, SiAmazonwebservices, SiVercel, SiOpenai, SiFramer, 
@@ -39,7 +40,13 @@ const toolingLogos = [
 
 export default function TechnicalSection() {
   return (
-    <section className="mb-32 font-mono">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6 }}
+      className="mb-32 font-mono"
+    >
       <div className="pt-12 border-t border-white/5">
         
         {/* Section Header with Metadata */}
@@ -123,6 +130,6 @@ export default function TechnicalSection() {
             <span>[ Lifecycle: Active ]</span>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

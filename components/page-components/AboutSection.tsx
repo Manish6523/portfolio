@@ -3,12 +3,17 @@
 import React from "react";
 import Image from "next/image";
 import SpotlightCard from '@/components/SpotlightCard';
+import { motion } from 'framer-motion';
 
 
 export default function AboutSection() {
   return (
-    <section
+    <motion.section
       id="about"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6 }}
       className="mb-32 pt-12 border-t border-white/5 font-mono selection:bg-blue-500/30"
     >
       <div className="space-y-1 mb-8">
@@ -24,7 +29,13 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
 
           {/* LEFT COLUMN */}
-          <div className="lg:col-span-5 space-y-8 md:mx-0 mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-5 space-y-8 md:mx-0 mx-auto"
+          >
             <div className="relative group p-1 bg-zinc-900/50 rounded-sm inline-block">
               <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
               <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
@@ -63,10 +74,16 @@ export default function AboutSection() {
               </div>
               <p className="text-blue-500">{"}"};</p>
             </div>
-          </div>
+          </motion.div>
 
           {/* RIGHT COLUMN */}
-          <div className="lg:col-span-7 space-y-12">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="lg:col-span-7 space-y-12"
+          >
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
@@ -132,9 +149,9 @@ export default function AboutSection() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
         </div>
       </SpotlightCard>
-    </section>
+    </motion.section>
   );
 }

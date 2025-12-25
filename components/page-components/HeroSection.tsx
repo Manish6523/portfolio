@@ -7,10 +7,16 @@ import { Github, Linkedin, Mail, Instagram, ArrowDownRight, Terminal } from 'luc
 import SplitText from '@/components/react-bits/SplitText'
 import RotatingText from '../react-bits/RotatingText'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function HeroSection() {
     return (
-        <section className="mb-32 md:pt-12 flex flex-col md:flex-row gap-16 items-start justify-between font-mono">
+        <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-32 md:pt-12 flex flex-col md:flex-row gap-16 items-start justify-between font-mono"
+        >
             <div className="flex-1 space-y-8">
                 {/* 1. Status Indicator: Terminal Style */}
                 <div className="flex items-center gap-4">
@@ -78,7 +84,12 @@ export default function HeroSection() {
             </div>
 
             {/* 5. Hero Image: Offset Rectangular Fragment */}
-            <div className="relative group self-center md:self-start">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative group self-center md:self-start"
+            >
                 {/* Frame Markers */}
                 <div className="absolute -top-4 -right-4 text-zinc-800 text-[10px] font-mono">FRM_024</div>
                 <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-blue-500/30 z-20" />
@@ -102,7 +113,7 @@ export default function HeroSection() {
                     <span>Object: Developer</span>
                     <span>Mode: Stable</span>
                 </div>
-            </div>
-        </section>
+            </motion.div>
+        </motion.section>
     )
 }

@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import './globals.css';
 import CustomCursor from "@/components/ui/CustomCursor";
+import PageTransition from "@/components/PageTransition";
 
 // app/layout.tsx
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <CustomCursor />
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </ThemeProvider>
       </body>
     </html>

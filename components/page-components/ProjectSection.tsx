@@ -3,11 +3,19 @@
 import React from 'react';
 import ProjectCard from '../ProjectCard';
 import { PROJECTS } from '@/lib/constants';
+import { motion } from 'framer-motion';
 
 
 export default function ProjectSection() {
   return (
-    <section id="work" className="mb-32 font-mono">
+    <motion.section
+      id="work"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6 }}
+      className="mb-32 font-mono"
+    >
       <div className="pt-12 border-t border-white/5">
         
         {/* Section Header */}
@@ -31,6 +39,6 @@ export default function ProjectSection() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
