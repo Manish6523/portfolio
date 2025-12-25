@@ -1,11 +1,36 @@
 "use client";
 
 import React from 'react';
-import {GitHubCalendar} from 'react-github-calendar';
+import { GitHubCalendar } from 'react-github-calendar';
 import { motion } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
 
+// A hook for getting the current responsive breakpoint
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    // Set initial
+    function handleResize() {
+      setIsMobile(window.innerWidth < 768);
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
+}
+
 export default function GithubSection() {
+  const isMobile = useIsMobile();
+
+  // Reduce the block size, margin, and font size for mobile screens
+  const blockSize = isMobile ? 7 : 12;
+  const blockMargin = isMobile ? 2 : 4;
+  const fontSize = isMobile ? 8 : 12;
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
@@ -30,9 +55,9 @@ export default function GithubSection() {
       </div>
 
       {/* The "Leaky" Container */}
-      <div className="relative group p-0 md:p-6 bg-[#050505] border border-zinc-900 rounded-3xl md:rounded-sm overflow-dden">
+      <div className="relative group p-1 md:p-6 bg-[#050505] border border-zinc-900">
         {/* Decorative Grid Background */}
-        <div className="absolute rounded-3xl md:rounded-sm  inset-0 opacity-[0.03] pointer-events-none bg-[length:20px_20px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
+        <div className="absolute  inset-0 opacity-[0.03] pointer-events-none bg-[length:20px_20px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
 
         {/* Frame Markers */}
         <div className="absolute -top-2 -left-2 size-4 border-t border-l border-zinc-700" />
@@ -40,18 +65,20 @@ export default function GithubSection() {
         <div className="absolute -bottom-2 -left-2 size-4 border-b border-l border-zinc-700" />
         <div className="absolute -bottom-2 -right-2 size-4 border-b border-r border-zinc-700" />
 
-        <SpotlightCard className="relative flex justify-center transition-all duration-700 ease-in-out">
-          <GitHubCalendar 
-            username="Manish6523"
-            fontSize={12}
-            blockSize={12}
-            blockMargin={4}
-            colorScheme="dark"
-            theme={{
-              dark: ['#111111', '#064e3b', '#065f46', '#059669', '#10b981'],
-            }}
-          />
-        </SpotlightCard>
+        {/* <SpotlightCard className="relative flex justify-center transition-all duration-700 ease-in-out"> */}
+          <div className={`flex items-center justify-center ${isMobile ? "w-full overflow-x-auto px-1 " : "mx-auto"}`}>
+            <GitHubCalendar 
+              username="Manish6523"
+              fontSize={fontSize}
+              blockSize={blockSize}
+              blockMargin={blockMargin}
+              colorScheme="dark"
+              theme={{
+                dark: ['#111111', '#064e3b', '#065f46', '#059669', '#10b981'],
+              }}
+            />
+          </div>
+        {/* </SpotlightCard> */}
       </div>
       
       {/* Footer System Details */}

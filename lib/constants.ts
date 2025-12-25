@@ -168,6 +168,23 @@ export const NAV_LINKS: NavLink[] = [
         href: "#timeline"
     }, {
         name: "Contact",
-        href: "mailto:ms5392363@gmail.com"
+        href: "#contact"
+
+        // href: "mailto:ms5392363@gmail.com"
     },
 ];
+
+export const SOCIALS_LINKS = [
+    {
+        name: "LinkedIn",
+        href: "https://www.linkedin.com/in/sharma-manish6523",
+    },
+    {
+        name: "GitHub",
+        href: "https://github.com/Manish6523",
+    },
+    {
+        name: "Instagram",
+        href: "https://www.instagram.com/sharma.man1sh",
+    },
+]
