@@ -7,8 +7,8 @@ import {TIMELINE} from '@/lib/constants';
 
 const TimelineSection = () => {
     return (
-        <section className="mb-32 font-sans">
-            <div className="pt-12 border-t border-white/10">
+        <section id="timeline" className="mb-32 font-sans">
+            <div className="pt-20 border-t border-white/10">
                 {/* Section Header */}
                 <div className="flex justify-between items-end mb-16">
                     <div className="space-y-1">

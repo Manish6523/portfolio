@@ -16,7 +16,7 @@ export default function ProjectSection() {
       transition={{ duration: 0.6 }}
       className="mb-32 font-mono"
     >
-      <div className="pt-12 border-t border-white/5">
+      <div className="pt-20 border-t border-white/5">
         
         {/* Section Header */}
         <div className="flex justify-between items-end mb-16">

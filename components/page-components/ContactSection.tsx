@@ -52,7 +52,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pt-12 border-t border-white/5 font-mono overflow-hidden">
+    <section id="contact" className="pt-20 border-t border-white/5 font-mono overflow-hidden">
       <div className="max-w-7xl mx-auto ">
 
         {/* SECTION HEADER */}

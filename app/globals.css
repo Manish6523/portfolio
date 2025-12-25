@@ -12,6 +12,7 @@
   html, body {
     cursor: none !important;
     overflow-x: hidden; /* Prevents cursor from causing layout shifts */
+    scroll-behavior: smooth;
   }
 
   /* Specifically target interactive elements that often override cursor styles */
@@ -19,6 +20,7 @@
     cursor: none !important;
   }
 }
+
 
 @custom-variant dark (&:is(.dark *));
 

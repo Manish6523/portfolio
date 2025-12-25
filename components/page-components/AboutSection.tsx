@@ -14,7 +14,7 @@ export default function AboutSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="mb-32 pt-12 border-t border-white/5 font-mono selection:bg-blue-500/30"
+      className="mb-32 pt-20 border-t border-white/5 font-mono selection:bg-blue-500/30"
     >
       <div className="space-y-1 mb-8">
         <h2 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
