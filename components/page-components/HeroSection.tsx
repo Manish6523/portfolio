@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { Github, Linkedin, Mail, Instagram, ArrowDownRight, Terminal } from 'lucide-react'
@@ -8,8 +8,32 @@ import SplitText from '@/components/react-bits/SplitText'
 import RotatingText from '../react-bits/RotatingText'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useCursorActivity } from '@/lib/lanyard'
 
 export default function HeroSection() {
+    const { isCoding, details, start } = useCursorActivity();
+    const [timeElapsed, setTimeElapsed] = useState("");
+
+    // Live Ticking Logic for Cursor Activity
+    useEffect(() => {
+        if (!isCoding || !start) return;
+
+        const updateTimer = () => {
+            const now = Date.now();
+            const diff = now - start;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            setTimeElapsed(`${hours}h ${minutes}m ${seconds}s`);
+        };
+
+        updateTimer();
+        const interval = setInterval(updateTimer, 1000);
+        return () => clearInterval(interval);
+    }, [isCoding, start]);
+
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -22,12 +46,32 @@ export default function HeroSection() {
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 px-3 py-1 bg-zinc-900/50 border border-white/5 rounded-sm">
                         <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isCoding ? 'bg-blue-400' : 'bg-green-400'}`}></span>
+                            <span className={`relative inline-flex rounded-full h-2 w-2 ${isCoding ? 'bg-blue-500' : 'bg-green-500'}`}></span>
                         </span>
-                        <span className="text-[10px] uppercase tracking-widest text-zinc-400">Status: Building Quizard AI</span>
+                        <span className="text-[10px] uppercase tracking-widest text-zinc-400">
+                            {isCoding ? (
+                                <span className='flex items-center font-mono'>
+                                    <span className=" flex items-center gap-1 shadow-inner">
+                                        <span className="text-white">coding in</span>
+                                        <Image src='https://img.icons8.com/color/48/cursor-ai.png' height='12' width='15' alt='cursor' />
+                                        <span className="text-blue-400 font-semibold">[Cursor]</span>
+                                    </span>
+                                    <span className="ml-2 text-zinc-600">
+                                        <span className="text-white">{timeElapsed}</span>
+                                    </span>
+                                </span>
+                            ) : (
+                                <span className="font-mono text-[10px]">
+                                    <span className="text-zinc-400">Status:</span>
+                                    <span className="ml-2 text-white">Building Quizard AI</span>
+                                </span>
+                            )}
+                        </span>
                     </div>
-                    <div className="text-[10px] text-zinc-700 tracking-tighter">LOC: 23.0225° N, 72.5714° E</div>
+                    <div className="text-[10px] text-zinc-700 tracking-tighter">
+                        {isCoding ? `ACT: ${details || 'Thinking...'}` : "LOC: 23.0225° N, 72.5714° E"}
+                    </div>
                 </div>
 
                 {/* 2. Headline: Bold & Leaky */}
@@ -48,11 +92,6 @@ export default function HeroSection() {
                             <RotatingText
                                 texts={["Next.js", "Supabase", "AI_Logic", "Postgres", "Scalability"]}
                                 mainClassName="text-blue-500 font-bold"
-                                // staggerFrom="last"
-                                // initial={{ y: "100%" }}
-                                // animate={{ y: 0 }}
-                                // exit={{ y: "-120%" }}
-                                // transition={{ type: "spring", damping: 30, stiffness: 400 }}
                                 rotationInterval={2500}
                             />
                         </span> .
@@ -83,14 +122,13 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* 5. Hero Image: Offset Rectangular Fragment */}
+            {/* 5. Hero Image Section (Unchanged) */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative group self-center md:self-start"
             >
-                {/* Frame Markers */}
                 <div className="absolute -top-4 -right-4 text-zinc-800 text-[10px] font-mono">FRM_024</div>
                 <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-blue-500/30 z-20" />
                 <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-blue-500/30 z-20" />
@@ -104,14 +142,12 @@ export default function HeroSection() {
                         className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                         style={{ transform: "scaleX(-1)" }}
                     />
-                    {/* Scanline / Grid Effect */}
                     <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]" />
                 </div>
                 
-                {/* Image Label */}
                 <div className="mt-4 flex justify-between items-center text-[9px] font-mono text-zinc-700 uppercase tracking-widest">
                     <span>Object: Developer</span>
-                    <span>Mode: Stable</span>
+                    <span>Mode: {isCoding ? 'Focus' : 'Stable'}</span>
                 </div>
             </motion.div>
         </motion.section>

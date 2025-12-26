@@ -7,6 +7,7 @@ import { Menu, X, Terminal as TerminalIcon } from 'lucide-react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOnline, setIsOnline] = useState(typeof window !== "undefined" ? window.navigator.onLine : true);
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -16,6 +17,24 @@ const Navbar = () => {
       document.body.style.overflow = 'unset';
     }
   }, [isOpen]);
+
+  // Track online/offline status
+  useEffect(() => {
+    function updateOnlineStatus() {
+      setIsOnline(window.navigator.onLine);
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // set initial status
+    updateOnlineStatus();
+
+    return () => {
+      window.removeEventListener('online', updateOnlineStatus);
+      window.removeEventListener('offline', updateOnlineStatus);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 z-[100] w-full border-b border-white/5 bg-black/60 backdrop-blur-xl font-mono">
@@ -43,7 +62,11 @@ const Navbar = () => {
             </a>
           ))}
           <div className="h-4 w-px bg-zinc-800" />
-          <span className="text-[8px] text-green-500 animate-pulse tracking-tighter uppercase">Sys_Online</span>
+          {isOnline ? (
+            <span className="text-[8px] text-green-500 animate-pulse tracking-tighter uppercase">Sys_Online</span>
+          ) : (
+            <span className="text-[8px] text-red-500 animate-pulse tracking-tighter uppercase">Sys_Offline</span>
+          )}
         </div>
 
         {/* MOBILE TRIGGER */}
@@ -96,9 +119,18 @@ const Navbar = () => {
             {/* Bottom System Metadata */}
             <div className="mt-auto pb-12 relative z-10">
                <div className="p-4 border border-zinc-900 bg-zinc-950/50 space-y-2">
-                  <p className="text-[9px] text-zinc-600 uppercase tracking-widest">Connection_Secure: true</p>
+                  <p className="text-[9px] text-zinc-600 uppercase tracking-widest">
+                    Connection_Secure: {isOnline ? 'true' : 'false'}
+                  </p>
                   <p className="text-[9px] text-zinc-600 uppercase tracking-widest font-bold">Node_Active: Ahmedabad_IN</p>
                   <p className="text-[9px] text-blue-900 uppercase tracking-widest">Protocol: HTTPS/TLS_1.3</p>
+                  <div className="pt-1">
+                    {isOnline ? (
+                      <span className="text-[8px] text-green-500 animate-pulse tracking-tighter uppercase">[Sys_Online]</span>
+                    ) : (
+                      <span className="text-[8px] text-red-500 animate-pulse tracking-tighter uppercase">[Sys_Offline]</span>
+                    )}
+                  </div>
                </div>
             </div>
           </motion.div>
