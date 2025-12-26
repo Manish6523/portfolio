@@ -10,6 +10,7 @@ import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
 export default function ProjectPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const params = useParams() as { id: string };
   const project: Project | undefined = PROJECTS.find((p) => p.id === params.id);
@@ -29,14 +30,85 @@ export default function ProjectPage() {
   if (!project) return notFound();
 
   const heroImage: string = project.images[0];
-  const galleryImages: string[] = project.images.slice(1);
+  const galleryImages: string[] = project.images ;
 
-  const scrollCarousel = (direction: 'left' | 'right') => {
+  // Scrolls the carousel to the image at index
+  const scrollToImage = (index: number) => {
     if (carouselRef.current) {
-      const scrollAmount = direction === 'left' ? -400 : 400;
-      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const scrollChildren = carouselRef.current.children;
+      const clampedIndex = Math.max(0, Math.min(index, galleryImages.length - 1));
+      const child = scrollChildren[clampedIndex];
+      if (child) {
+        const childLeft = (child as HTMLElement).offsetLeft;
+        carouselRef.current.scrollTo({ left: childLeft - 24, behavior: 'smooth' }); // -24 due to px-6 (-mx-6 + px-6)
+      }
     }
   };
+
+  // Button handlers
+  const handleScrollLeft = () => {
+    let newIndex = carouselIndex - 1;
+    if (newIndex < 0) newIndex = galleryImages.length - 1;
+    setCarouselIndex(newIndex);
+    scrollToImage(newIndex);
+  };
+
+  const handleScrollRight = () => {
+    let newIndex = carouselIndex + 1;
+    if (newIndex >= galleryImages.length) newIndex = 0;
+    setCarouselIndex(newIndex);
+    scrollToImage(newIndex);
+  };
+
+  // Autoscroll effect
+  useEffect(() => {
+    if (galleryImages.length < 2) return;
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => {
+        let next = prev + 1;
+        if (next >= galleryImages.length) next = 0;
+        scrollToImage(next);
+        return next;
+      });
+    }, 3500);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line
+  }, [galleryImages.length]);
+
+  // Sync manual button navigation and index with scroll
+  useEffect(() => {
+    scrollToImage(carouselIndex);
+    // eslint-disable-next-line
+  }, [carouselIndex]);
+
+  // Snap the index to the nearest slide if user scrolls manually
+  useEffect(() => {
+    const ref = carouselRef.current;
+    if (!ref) return;
+    let timeout: NodeJS.Timeout | null = null;
+    const onScroll = () => {
+      // Delay until user stops scrolling
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const children = ref.children;
+        let closestIdx = 0;
+        let closestDistance = Infinity;
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i] as HTMLElement;
+          const dist = Math.abs(child.offsetLeft - ref.scrollLeft);
+          if (dist < closestDistance) {
+            closestDistance = dist;
+            closestIdx = i;
+          }
+        }
+        setCarouselIndex(closestIdx);
+      }, 150);
+    };
+    ref.addEventListener('scroll', onScroll);
+    return () => {
+      ref.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen  text-zinc-400 font-mono selection:bg-blue-500/30 overflow-x-hidden">
@@ -138,10 +210,10 @@ export default function ProjectPage() {
                     <h3 className="text-2xl font-bold text-white uppercase tracking-tighter">Asset_Visualizer</h3>
                 </div>
                 <div className="flex gap-2">
-                    <button onClick={() => scrollCarousel('left')} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
+                    <button onClick={handleScrollLeft} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
                         <ChevronLeft className="w-4 h-4 text-zinc-400" />
                     </button>
-                    <button onClick={() => scrollCarousel('right')} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
+                    <button onClick={handleScrollRight} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
                         <ChevronRight className="w-4 h-4 text-zinc-400" />
                     </button>
                 </div>
@@ -156,16 +228,16 @@ export default function ProjectPage() {
                         key={i}
                         whileHover={{ y: -5 }}
                         onClick={() => setSelectedImage(img)}
-                        className="relative min-w-[300px] md:min-w-[600px] aspect-video bg-zinc-900 border border-zinc-800 snap-center overflow-hidden shrink-0 group"
+                        className={`relative min-w-[300px] md:min-w-[600px] aspect-video bg-zinc-900 border border-zinc-800 snap-center overflow-hidden shrink-0 group `}
                     >
-                        <div className="absolute top-2 left-2 z-10 text-[8px] text-zinc-500 uppercase tracking-tighter bg-black/40 px-1">
-                            LOG_ID: {project.id}_{i}
+                        <div className="absolute top-2 left-2 z-10 text-[10px] text-zinc-300 uppercase tracking-tighter bg-black/40 px-1">
+                            LOG_ID: {img.split('.')[0]}
                         </div>
                         <Image 
                             src={img} 
                             alt={`Slide ${i}`} 
                             fill 
-                            className="object-cover opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" 
+                            className="object-cover opacity-50  group-hover:opacity-100 transition-all duration-700" 
                         />
                         <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <Maximize2 className="w-6 h-6 text-white" />

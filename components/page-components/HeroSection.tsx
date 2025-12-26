@@ -51,8 +51,8 @@ export default function HeroSection() {
                         </span>
                         <span className="text-[10px] uppercase tracking-widest text-zinc-400">
                             {isCoding ? (
-                                <span className='flex items-center font-mono'>
-                                    <span className=" flex items-center gap-1 shadow-inner">
+                                <span className="flex items-center font-mono">
+                                    <span className="flex items-center gap-1 shadow-inner">
                                         <span className="text-white hidden md:block">coding in</span>
                                         <Image src='https://img.icons8.com/color/48/cursor-ai.png' height='12' width='15' alt='cursor' />
                                         <span className="text-blue-400 font-semibold">[Cursor]</span>
@@ -62,9 +62,15 @@ export default function HeroSection() {
                                     </span>
                                 </span>
                             ) : (
-                                <span className="font-mono text-[10px]">
-                                    <span className="text-zinc-400">Status:</span>
-                                    <span className="ml-2 text-white">Building Quizard AI</span>
+                                <span className="flex items-center gap-1 font-mono">
+                                    <span className="flex items-center gap-1 shadow-inner">
+                                        <span className="text-white hidden md:block">Status :</span>
+                                        <Image src='https://img.icons8.com/color/48/cursor-ai.png' height='12' width='15' alt='cursor' className='opacity-50 grayscale' />
+                                        <span className="text-zinc-600 font-semibold">[Offline]</span>
+                                    </span>
+                                    <span className="ml-2 text-zinc-500 hidden md:block">
+                                        <span className="text-white">Last seen coding recently</span>
+                                    </span>
                                 </span>
                             )}
                         </span>

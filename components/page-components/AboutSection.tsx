@@ -34,7 +34,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5 space-y-8 md:mx-0 mx-auto"
+            className="lg:col-span-5 space-y-8 lg:mx-0 mx-auto"
           >
             <div className="relative group p-1 bg-zinc-900/50 rounded-sm inline-block">
               <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
