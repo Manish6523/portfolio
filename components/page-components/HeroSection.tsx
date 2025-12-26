@@ -53,7 +53,7 @@ export default function HeroSection() {
                             {isCoding ? (
                                 <span className='flex items-center font-mono'>
                                     <span className=" flex items-center gap-1 shadow-inner">
-                                        <span className="text-white">coding in</span>
+                                        <span className="text-white hidden md:block">coding in</span>
                                         <Image src='https://img.icons8.com/color/48/cursor-ai.png' height='12' width='15' alt='cursor' />
                                         <span className="text-blue-400 font-semibold">[Cursor]</span>
                                     </span>

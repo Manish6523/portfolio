@@ -145,16 +145,16 @@ export default function AIAgent() {
 
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[88%] p-4 text-[11px] leading-relaxed ${
+                  <div className={`max-w-[95%] md:max-w-[88%] p-4 text-[11px] leading-relaxed ${
                     m.role === 'user' 
                       ? 'bg-blue-600 text-black font-bold rounded-2xl rounded-tr-none' 
                       : 'bg-white/5 text-zinc-200 border border-white/10 rounded-2xl rounded-tl-none'
                   }`}>
                     {m.role === 'assistant' ? (
-                      <div className="prose prose-invert prose-xs">
+                      <div className="prose prose-invert prose-xs wrap-break-word">
                         <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
                           a: (props) => <a {...props} target="_blank" className="text-blue-400 underline" />,
-                          ul: (props) => <ul {...props} className="list-disc ml-4 mt-2" />,
+                          ul: (props) => <ul {...props} className="list-disc ml-3 mt-2" />,
                           strong: (props) => <span {...props} className="text-white font-black" />
                         }}>
                           {m.content}
