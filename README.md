@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Manish Sharma // Portfolio v3
 
-## Getting Started
+### `Status: Production-Grade` | `0x_FullStack` | `execution_bias`
 
-First, run the development server:
+A brutalist, high-performance portfolio with a "Leaky" aesthetic. Features real-time IDE tracking, a live AI proxy agent, and a custom design system.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠 Tech Stack
+
+- **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+- **AI Engine:** [Gemini 2.0 Flash](https://ai.google.dev/) via Google Generative AI SDK
+- **Realtime Presence:** [Lanyard API](https://lanyard.rest/) (Discord WebSocket & REST)
+- **Database:** [PostgreSQL](https://www.postgresql.org/), [Supabase](https://supabase.com/)
+- **Animation:** [Framer Motion](https://www.framer.com/motion/), [Lucide React](https://lucide.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+## ✨ Features
+
+### 🛰 Real-time IDE Presence
+
+- Live hero status synced with **Cursor IDE** via Lanyard websocket bridge.
+- **Live Timer:** Real session duration.
+- **File Awareness:** Shows current file being edited.
+- **Visual Status:** `Focus_Active` ↔ `Stable_Idle` cues.
+
+### 🤖 AI Proxy (Gemini-powered)
+
+- Server-side AI agent ("digital twin") summarizes project status and timeline.
+- Fast, context-injected short-burst responses for recruiters.
+- Knows if I’m actively coding, leaks session info.
+
+### 🧩 Modular Components
+
+- **SplitText & RotatingText:** Animated typography React-bits.
+- **Vinyl Avatar:** Circular profile w/ reactive badges and orbit rings.
+- **Brutalist Pill Status:** Monochrome IDE-style bar.
+
+---
+
+## 🏗 Structure
+
+```
+app/
+  api/                # AI & Lanyard proxies
+  page.tsx            # Main route
+  layout.tsx          # Global config/layout
+components/
+  ui/                 # Shadcn / general UI
+  react-bits/         # Custom text/animation
+  HeroSection.tsx     # Hero logic & presence
+lib/
+  lanyard.ts          # WebSocket/REST presence logic
+  constants.ts        # Project/social data
+  gemini.ts           # AI logic
+public/               # Static assets/icons
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚦 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone**
 
-## Learn More
+    ```bash
+    git clone https://github.com/sharma-manish6523/portfolio-v3.git
+    cd portfolio-v3
+    npm install
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Setup Environment**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Create `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```
+    GEMINI_API_KEY=your_gemini_key_here
+    NEXT_PUBLIC_DISCORD_ID=919414679208591391
+    ```
 
-## Deploy on Vercel
+3. **Discord Rich Presence**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    - Join the **Lanyard Discord**
+    - Turn ON "Display current activity..." in Discord settings
+    - Install the **Discord Presence Extension** in Cursor (or VS Code)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Develop**
+
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 📈 Roadmap
+
+- [x] Live Cursor Integration
+- [x] Gemini 2.0 AI Proxy
+- [ ] Spotify "Coding Soundtrack" Integration
+- [ ] GitHub “Last Push” Status Log
+- [ ] One-click Resume PDF Generation
+
+---
+
+## 🤝 Connect
+
+- [LinkedIn](https://www.linkedin.com/in/sharma-manish6523)
+- [manishsharma.dev](https://manishsharma.dev)
+- **Status:** Building **Quizard AI**
+
+---
+
+> _Generated with execution_bias by Manish's AI Proxy._
+
+**Want an architecture diagram (Mermaid.js)? Open an issue or reach out.**
