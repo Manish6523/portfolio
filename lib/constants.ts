@@ -161,19 +161,20 @@ export const TIMELINE: TimelineEntry[] = [
 export const NAV_LINKS: NavLink[] = [
     {
         name: "About",
-        href: "#about"
+        href: "/about"
     }, {
-        name: "Work",
-        href: "#work"
+        name: "project",
+        href: "/project"
     }, {
         name: "Timeline",
-        href: "#timeline"
+        href: "/timeline"
     }, {
         name: "Contact",
-        href: "#contact"
-
-        // href: "mailto:ms5392363@gmail.com"
-    },
+        href: "/contact"
+    },{
+        name: "technical",
+        href: "/technical"
+    }
 ];
 
 export const SOCIALS_LINKS = [

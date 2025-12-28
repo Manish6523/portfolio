@@ -1,7 +1,8 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import './globals.css';
 import CustomCursor from "@/components/ui/CustomCursor";
-import PageTransition from "@/components/PageTransition";
+import { AnimatePresence } from "framer-motion";
+import Navbar from "@/components/Navbar";
 
 // app/layout.tsx
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,10 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
+          <AnimatePresence mode="wait">
           {/* <CustomCursor /> */}
-          <PageTransition>
             {children}
-          </PageTransition>
+          </AnimatePresence>
         </ThemeProvider>
       </body>
     </html>

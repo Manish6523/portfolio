@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { NAV_LINKS } from '@/lib/constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Terminal as TerminalIcon } from 'lucide-react'
+import Link from 'next/link'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,29 +38,29 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 z-[100] w-full border-b border-white/5 bg-black/60 backdrop-blur-xl font-mono">
+    <nav className="fixed top-0 z-100 w-full border-b border-white/5 bg-black/60 backdrop-blur-xl font-mono">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         
         {/* LOGO */}
-        <a 
+        <Link 
           href="/" 
           className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 group "
         >
           <span className="text-blue-500 group-hover:rotate-180 transition-transform duration-500">{"//"}</span>
           MS<span className="text-zinc-700">.</span>
-        </a>
+        </Link>
 
         {/* DESKTOP NAV */}
         <div className="hidden md:flex gap-10 text-[10px] font-bold items-center uppercase tracking-widest">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               className="text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-1 "
             >
               <span className="text-[8px] text-zinc-800 tracking-tighter">0{NAV_LINKS.indexOf(link) + 1}</span>
               {link.name}
-            </a>
+            </Link>
           ))}
           <div className="h-4 w-px bg-zinc-800" />
           {isOnline ? (
@@ -99,19 +100,22 @@ const Navbar = () => {
               
               <div className="flex flex-col gap-8">
                 {NAV_LINKS.map((link, i) => (
-                  <motion.a
+                  <motion.div
                     initial={{ x: 20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.1 + i * 0.1 }}
                     key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-4xl font-bold text-white uppercase tracking-tighter flex items-end gap-4 group"
                   >
-                    <span className="text-xs text-blue-600 mb-1 font-mono">0{i + 1}</span>
-                    {link.name}
-                    <div className="h-[1px] flex-1 bg-zinc-900 group-hover:bg-blue-600 transition-colors mb-3" />
-                  </motion.a>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-4xl font-bold text-white uppercase tracking-tighter flex items-end gap-4 group"
+                    >
+                      <span className="text-xs text-blue-600 mb-1 font-mono">0{i + 1}</span>
+                      {link.name}
+                      <div className="h-[1px] flex-1 bg-zinc-900 group-hover:bg-blue-600 transition-colors mb-3" />
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </div>

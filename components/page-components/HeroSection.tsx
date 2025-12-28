@@ -44,6 +44,7 @@ export default function HeroSection() {
     }, [isCoding, start]);
 
     return (
+        <>
         <motion.section initial={
                 {
                     opacity: 0,
@@ -61,7 +62,7 @@ export default function HeroSection() {
                     duration: 0.6
                 }
             }
-            className="mb-32 md:pt-12 flex flex-col md:flex-row gap-16 items-start justify-between font-mono">
+            className="md:mt-12 flex flex-col md:flex-row gap-16 items-start justify-between font-mono">
             <div className="flex-1 space-y-8">
                 {/* 1. Status Indicator: Terminal Style */}
                 <div className="flex items-center gap-4">
@@ -130,10 +131,10 @@ export default function HeroSection() {
                     <p className="text-sm leading-relaxed text-zinc-500">
                         {">"}
                         Full-stack engineer turning
-                        <span className="text-white">ideas</span>
+                        <span className="text-white"> ideas </span>
                         into clean, 
                             scalable products with strong
-                        <span className="text-white">execution</span>. 
+                        <span className="text-white"> execution</span>. 
                                 Building
                         <span className="inline-block align-middle ml-2">
                             <RotatingText texts={
@@ -231,5 +232,11 @@ export default function HeroSection() {
                 </div>
             </motion.div>
         </motion.section>
+        <footer className="py-4 mt-18 border-t border-white/5 text-center">
+            <p className="text-[10px] font-mono text-zinc-700 tracking-[0.4em] uppercase">
+                use navigation for more info
+            </p>
+        </footer>
+        </>
     )
 }
