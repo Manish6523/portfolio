@@ -69,7 +69,7 @@ export default function ContactSection() {
 
           {/* LEFT: The Terminal Input Form */}
           <div className="bg-zinc-950 border border-zinc-900 p-6 md:p-8 rounded-sm relative overflow-hidden group">
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[length:30px_30px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-size-[30px_30px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
 
             <form className="space-y-6 md:space-y-8 relative z-10">
               <div className="space-y-4">
