@@ -61,7 +61,7 @@ const containerVariants = {
 
 const itemVariants = {
   initial: { opacity: 0, y: 15, filter: "blur(4px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: "easeOut" } }
+  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.4, ease: [0.17, 0.67, 0.83, 0.67] as const } }
 };
 
 export default function AboutManifest() {
@@ -149,7 +149,7 @@ export default function AboutManifest() {
               
               {/* PORTRAIT BLOCK */}
               <div className="border border-zinc-900 p-2 bg-zinc-950 shadow-2xl shadow-blue-500/5">
-                <div className="relative aspect-[4/5] overflow-hidden grayscale contrast-[1.1] brightness-90 hover:grayscale-0 transition-all duration-700">
+                <div className="relative aspect-4/5 overflow-hidden grayscale contrast-[1.1] brightness-90 hover:grayscale-0 transition-all duration-700">
                   <Image 
                     src="/me02.png" 
                     alt="Manish Sharma" 
