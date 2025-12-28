@@ -4,6 +4,7 @@ import React from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 import { motion } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
+import SectionHeader from './SectionHeader';
 
 // A hook for getting the current responsive breakpoint
 function useIsMobile() {
@@ -40,14 +41,11 @@ export default function GithubSection() {
     >
       {/* Header with System Numbering */}
       <div className="flex flex-col md:flex-row justify-between items-start mb-8 gap-4">
-        <div className="space-y-1">
-          <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600">
-            03 // Activity_Log
-          </h2>
-          <h3 className="text-2xl font-bold text-white tracking-tighter">
-            Engineering_Consistency.exe
-          </h3>
-        </div>
+        <SectionHeader
+          number="02"
+          label="Activity_Log"
+          title="Engineering_Consistency.exe"
+        />
         <div className="text-left md:text-right">
             <p className="text-[9px] text-zinc-700 uppercase tracking-widest">Data_Source: GitHub_API_V3</p>
             <p className="text-[10px] text-blue-500">{"[ STATUS: SYNCED ]"}</p>

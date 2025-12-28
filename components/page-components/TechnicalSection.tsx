@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import LogoLoop from '@/components/react-bits/LogoLoop';
 import { motion } from 'framer-motion';
 import { 
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiBun, SiGit, 
@@ -9,125 +8,128 @@ import {
   SiRedux, SiFigma, SiNodedotjs, SiExpress, SiSupabase, SiPostgresql, 
   SiMongodb, SiJsonwebtokens 
 } from 'react-icons/si';
+import SectionHeader from '../SectionHeader';
 
-const frontendLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-  { node: <SiRedux />, title: "Redux", href: "https://redux-toolkit.js.org" },
-  { node: <SiFramer />, title: "Framer", href: "https://www.framer.com/motion" },
-  { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
-];
+// Restored href logic within the Framer Motion component
+const SkillCard = ({ icon: Icon, name, index, href }: { icon: any, name: string, index: number, href: string }) => (
+  <motion.a 
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ opacity: 0, x: -10 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ 
+      duration: 0.3, 
+      // delay: index * 0.05,
+      ease: "easeOut" 
+    }}
+    whileHover={{ x: 5, backgroundColor: "rgba(30, 58, 138, 0.15)", borderColor: "rgba(59, 130, 246, 0.5)" }}
+    className="group relative flex cursor-pointer items-center gap-4 p-3 border border-zinc-900 bg-zinc-950/50 transition-all duration-200 cursor-alias block"
+  >
+    <div className="text-xl text-zinc-600 group-hover:text-blue-500 transition-colors">
+      <Icon />
+    </div>
+    <div className="flex flex-col">
+      <span className="text-[10px] font-bold text-zinc-400 group-hover:text-white uppercase tracking-wider">
+        {name}
+      </span>
+      {/* <span className="text-[8px] text-zinc-800 uppercase tracking-tighter font-mono group-hover:text-zinc-600">
+        view_docs.ptr
+      </span> */}
+    </div>
+    <div className="absolute top-0 right-0 w-1 h-1 bg-zinc-800 group-hover:bg-blue-500 transition-colors" />
+  </motion.a>
+);
 
-const backendLogos = [
-  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
-  { node: <SiExpress />, title: "Express", href: "https://expressjs.com" },
-  { node: <SiSupabase />, title: "Supabase", href: "https://supabase.com" },
-  { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
-  { node: <SiMongodb />, title: "MongoDB", href: "https://www.mongodb.com" },
-  { node: <SiJsonwebtokens />, title: "JWT", href: "https://jwt.io" },
-];
-
-const toolingLogos = [
-  { node: <SiOpenai />, title: "OpenAI", href: "https://platform.openai.com" },
-  { node: <SiVercel />, title: "Vercel", href: "https://vercel.com" },
-  { node: <SiAmazonwebservices />, title: "AWS", href: "https://aws.amazon.com" },
-  { node: <SiPostman />, title: "Postman", href: "https://www.postman.com" },
-  { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
-  { node: <SiBun />, title: "Bun", href: "https://bun.sh" }
-];
+const techStack = {
+  frontend: [
+    { icon: SiReact, name: "React", href: "https://react.dev" },
+    { icon: SiNextdotjs, name: "Next.js", href: "https://nextjs.org" },
+    { icon: SiTypescript, name: "TypeScript", href: "https://www.typescriptlang.org" },
+    { icon: SiTailwindcss, name: "Tailwind", href: "https://tailwindcss.com" },
+    { icon: SiRedux, name: "Redux_Toolkit", href: "https://redux-toolkit.js.org" },
+    { icon: SiFramer, name: "Framer_Motion", href: "https://www.framer.com/motion" },
+  ],
+  backend: [
+    { icon: SiNodedotjs, name: "Node.js", href: "https://nodejs.org" },
+    { icon: SiExpress, name: "Express", href: "https://expressjs.com" },
+    { icon: SiSupabase, name: "Supabase", href: "https://supabase.com" },
+    { icon: SiPostgresql, name: "PostgreSQL", href: "https://www.postgresql.org" },
+    { icon: SiMongodb, name: "MongoDB", href: "https://www.mongodb.com" },
+    { icon: SiJsonwebtokens, name: "Auth_JWT", href: "https://jwt.io" },
+  ],
+  tooling: [
+    { icon: SiOpenai, name: "OpenAI_API", href: "https://platform.openai.com" },
+    { icon: SiVercel, name: "Vercel", href: "https://vercel.com" },
+    { icon: SiAmazonwebservices, name: "AWS", href: "https://aws.amazon.com" },
+    { icon: SiPostman, name: "Postman", href: "https://www.postman.com" },
+    { icon: SiGit, name: "Git_Logic", href: "https://git-scm.com" },
+    { icon: SiBun, name: "Bun_Runtime", href: "https://bun.sh" },
+  ]
+};
 
 export default function TechnicalSection() {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6 }}
       className="mb-32 font-mono"
     >
       <div className="pt-12 border-t border-white/5">
         
-        {/* Section Header with Metadata */}
-        <div className="flex justify-between items-end mb-12">
-          <div className="space-y-1">
-            <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600">
-              04 // Architectural_Ecosystem
-            </h2>
-            <h3 className="text-2xl font-bold text-white tracking-tighter">
-              Integrated_Stack.manifest
-            </h3>
-          </div>
-          <div className="hidden md:block text-right">
-             <span className="text-[9px] text-zinc-800 uppercase tracking-widest leading-none block">Scanning Dependencies...</span>
-             <span className="text-[9px] text-blue-900 uppercase tracking-widest leading-none block">All modules stable</span>
+        {/* Header Logic */}
+        <div className="flex justify-between items-start mb-16">
+          <SectionHeader
+            number="03"
+            label="Architectural_Ecosystem"
+            title="Tech_Stack.manifest"
+            titleClassName="italic"
+          />
+          
+          <div className="text-right font-mono hidden sm:block">
+            <div className="text-[9px] text-blue-900 uppercase animate-pulse">Scanning System Modules...</div>
+            <div className="text-[9px] text-zinc-800 uppercase tracking-widest leading-none">Status: 0 errors / 0 warnings</div>
           </div>
         </div>
 
-        <div className="space-y-10">
-          
-          {/* Row 1: Frontend */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 group">
-              <span className="text-zinc-800 text-[10px] whitespace-nowrap">0xF1 // FRONTEND</span>
-              <div className="h-px w-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
-            </div>
-            <div className="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-700">
-              <LogoLoop
-                logos={frontendLogos}
-                speed={40}
-                direction="left"
-                logoHeight={32}
-                gap={80}
-                
-              />
-            </div>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {Object.entries(techStack).map(([category, skills], catIndex) => (
+            <motion.div 
+              key={category} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: catIndex * 0.1 }}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-blue-900 text-[10px] font-bold">0{catIndex + 1}</span>
+                <span className="text-zinc-600 text-[10px] uppercase tracking-[0.2em] font-bold">
+                  {category}_Layer
+                </span>
+                <motion.div 
+                   initial={{ width: 0 }}
+                   whileInView={{ width: "100%" }}
+                   transition={{ duration: 0.8, delay: 0.5 }}
+                   className="h-px bg-zinc-900" 
+                />
+              </div>
 
-          {/* Row 2: Backend */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 group">
-              <span className="text-zinc-800 text-[10px] whitespace-nowrap">0xB2 // BACKEND</span>
-              <div className="h-px w-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
-            </div>
-            <div className="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-700">
-              <LogoLoop
-                logos={backendLogos}
-                speed={30}
-                direction="right"
-                logoHeight={32}
-                gap={80}
-                
-              />
-            </div>
-          </div>
-
-          {/* Row 3: Tooling */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 group">
-              <span className="text-zinc-800 text-[10px] whitespace-nowrap">0xT3 // TOOLING</span>
-              <div className="h-px w-full bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
-            </div>
-            <div className="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-700">
-              <LogoLoop
-                logos={toolingLogos}
-                speed={50}
-                direction="left"
-                logoHeight={32}
-                gap={80}
-              />
-            </div>
-          </div>
-          
-        </div>
-
-        {/* Leaky Footer Metadata */}
-        <div className="mt-12 flex justify-between text-[9px] text-zinc-800 uppercase tracking-widest ">
-            <span>
-              [ Total_Modules: {frontendLogos.length + backendLogos.length + toolingLogos.length} ]
-            </span>
-            <span>[ Lifecycle: Active ]</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                {skills.map((skill, i) => (
+                  <SkillCard 
+                    key={skill.name} 
+                    icon={skill.icon} 
+                    name={skill.name} 
+                    href={skill.href}
+                    index={i + (catIndex * 6)} 
+                  />
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </motion.section>

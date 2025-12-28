@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <CustomCursor />
+          {/* <CustomCursor /> */}
           <PageTransition>
             {children}
           </PageTransition>

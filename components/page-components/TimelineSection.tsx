@@ -3,6 +3,7 @@
 import React from 'react';
 import {motion} from 'framer-motion';
 import {TIMELINE} from '@/lib/constants';
+import SectionHeader from '../SectionHeader';
 
 
 const TimelineSection = () => {
@@ -10,18 +11,12 @@ const TimelineSection = () => {
         <section id="timeline" className="mb-32 font-sans">
             <div className="pt-20 border-t border-white/10">
                 {/* Section Header */}
-                <div className="flex justify-between items-end mb-16">
-                    <div className="space-y-1">
-                        <h3 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
-                            06 // Timeline.log
-                        </h3>
-                        <h3 className="text-2xl font-bold text-white tracking-tighter">
-                            Journey_Chronicle.exe
-                        </h3>
-                    </div>
-                </div>
-
-                <div className="space-y-20">
+                <SectionHeader
+          number="05"
+          label="Timeline.log"
+          title="Journey_Chronicle.exe"
+        />
+                <div className="space-y-20 mt-12">
                     {
                     TIMELINE.map((item, index) => (
                         <motion.div key={index}

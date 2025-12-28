@@ -4,6 +4,7 @@ import React from 'react';
 import ProjectCard from '../ProjectCard';
 import { PROJECTS } from '@/lib/constants';
 import { motion } from 'framer-motion';
+import SectionHeader from '../SectionHeader';
 
 
 export default function ProjectSection() {
@@ -20,14 +21,11 @@ export default function ProjectSection() {
         
         {/* Section Header */}
         <div className="flex justify-between items-end mb-16">
-          <div className="space-y-1">
-            <h3 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
-              05 // Production_Deployments
-            </h3>
-            <h3 className="text-2xl font-bold text-white tracking-tighter">
-              Deployment_History.log
-            </h3>
-          </div>
+          <SectionHeader
+            number="04"
+            label="Production_Deployments"
+            title="Deployment_History.log"
+          />
           <div className="text-right hidden md:block text-[9px] text-zinc-800 uppercase tracking-widest">
             Total_Entries: {PROJECTS.length}
           </div>

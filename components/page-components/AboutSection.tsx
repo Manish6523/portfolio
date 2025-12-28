@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import SpotlightCard from '@/components/SpotlightCard';
 import { motion } from 'framer-motion';
+import SectionHeader from '@/components/SectionHeader';
 
 
 export default function AboutSection() {
@@ -16,14 +17,13 @@ export default function AboutSection() {
       transition={{ duration: 0.6 }}
       className="mb-32 pt-20 border-t border-white/5 font-mono selection:bg-blue-500/30"
     >
-      <div className="space-y-1 mb-8">
-        <h2 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
-          01 // About_Me
-        </h2>
-        <h3 className="text-xl font-bold text-white tracking-tighter">
-          The story behind the code
-        </h3>
-      </div>
+      <SectionHeader
+        number="01"
+        label="About_Me"
+        title="The story behind the code"
+        className="mb-8"
+        titleClassName="text-xl"
+      />
 
       <SpotlightCard className="max-w-6xl mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
@@ -36,11 +36,11 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 space-y-8 lg:mx-0 mx-auto"
           >
-            <div className="relative group p-1 bg-zinc-900/50 rounded-sm inline-block">
+            <div className="relative group p-1 bg-zinc-900/50 rounded-sm inline-block  ">
               <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
               <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
 
-              <div className="relative w-64 h-80 overflow-hidden grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700 ease-in-out">
+              <div className="relative  w-64 h-80  grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700 ease-in-out">
                 <Image
                   src="/me02.png"
                   alt="Manish Sharma"
@@ -54,7 +54,7 @@ export default function AboutSection() {
             </div>
 
             {/* Object Representation */}
-            <div className="space-y-1 text-[13px] leading-relaxed">
+            {/* <div className="space-y-1 text-[13px] leading-relaxed">
               <p className="text-blue-500">
                 const <span className="text-white">engineer</span> = {"{"}
               </p>
@@ -73,7 +73,7 @@ export default function AboutSection() {
                 </p>
               </div>
               <p className="text-blue-500">{"}"};</p>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* RIGHT COLUMN */}

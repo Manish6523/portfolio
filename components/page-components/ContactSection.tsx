@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Copy, Check, Terminal, ShieldCheck } from 'lucide-react';
 import { SOCIALS_LINKS } from '@/lib/constants';
+import SectionHeader from '../SectionHeader';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -57,14 +58,11 @@ export default function ContactSection() {
 
         {/* SECTION HEADER */}
         <div className="flex justify-between items-end mb-16">
-          <div className="space-y-1">
-            <h3 className="text-[10px] uppercase tracking-[0.5em] text-zinc-600">
-              07 // Initiate_Contact
-            </h3>
-            <h3 className="text-2xl font-bold text-white tracking-tighter">
-              Open_Comm_Channel
-            </h3>
-          </div>
+          <SectionHeader
+            number="06"
+            label="Initiate_Contact"
+            title="Open_Comm_Channel"
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">

@@ -43,7 +43,7 @@ const Navbar = () => {
         {/* LOGO */}
         <a 
           href="/" 
-          className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 group cursor-none"
+          className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 group "
         >
           <span className="text-blue-500 group-hover:rotate-180 transition-transform duration-500">{"//"}</span>
           MS<span className="text-zinc-700">.</span>
@@ -55,7 +55,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-1 cursor-none"
+              className="text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-1 "
             >
               <span className="text-[8px] text-zinc-800 tracking-tighter">0{NAV_LINKS.indexOf(link) + 1}</span>
               {link.name}
@@ -72,7 +72,7 @@ const Navbar = () => {
         {/* MOBILE TRIGGER */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white p-2 border border-zinc-900 rounded-sm cursor-none relative z-[110]"
+          className="md:hidden text-white p-2 border border-zinc-900 rounded-sm  relative z-[110]"
         >
           {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
