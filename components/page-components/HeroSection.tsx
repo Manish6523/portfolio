@@ -17,6 +17,28 @@ import Link from 'next/link'
 import {motion} from 'framer-motion'
 import {useCursorActivity} from '@/lib/lanyard'
 
+// Animation Variants
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.3,
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+    visible: { 
+        opacity: 1, 
+        y: 0, 
+        filter: "blur(0px)",
+        transition: { duration: 0.6, ease: "easeOut" } 
+    }
+};
+
 export default function HeroSection() {
     const {isCoding, details, start} = useCursorActivity();
     const [timeElapsed, setTimeElapsed] = useState("");
@@ -45,27 +67,14 @@ export default function HeroSection() {
 
     return (
         <>
-        <motion.section initial={
-                {
-                    opacity: 0,
-                    y: 20
-                }
-            }
-            animate={
-                {
-                    opacity: 1,
-                    y: 0
-                }
-            }
-            transition={
-                {
-                    duration: 0.6
-                }
-            }
-            className="md:mt-12 flex flex-col md:flex-row gap-16 items-start justify-between font-mono">
+        <motion.section 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="py-22 px-3 md:mt-12 flex flex-col max-w-5xl mx-auto md:flex-row gap-16 items-start justify-between font-mono">
             <div className="flex-1 space-y-8">
                 {/* 1. Status Indicator: Terminal Style */}
-                <div className="flex items-center gap-4">
+                <motion.div variants={itemVariants} className="flex items-center gap-4">
                     <div className="flex items-center gap-2 px-3 py-1 bg-zinc-900/50 border border-white/5 rounded-sm">
                         <span className="relative flex h-2 w-2">
                             <span className={
@@ -113,10 +122,10 @@ export default function HeroSection() {
                             details || 'Thinking...'
                         }` : "LOC: 23.0225° N, 72.5714° E"
                     } </div>
-                </div>
+                </motion.div>
 
                 {/* 2. Headline: Bold & Leaky */}
-                <div className="space-y-2">
+                <motion.div variants={itemVariants} className="space-y-2">
                     <h1 className="text-4xl md:text-7xl font-bold tracking-tighter text-white leading-[0.85]">
                         <SplitText text="Manish Sharma."
                             duration={2}
@@ -124,19 +133,19 @@ export default function HeroSection() {
                         <br/>
                         <span className="text-zinc-700 italic">0x_FullStack</span>
                     </h1>
-                </div>
+                </motion.div>
 
                 {/* 3. Description: Execution Logic */}
-                <div className="max-w-md space-y-6">
+                <motion.div variants={itemVariants} className="max-w-md space-y-6">
                     <p className="text-sm leading-relaxed text-zinc-500">
-                        {">"}
+                        {"> "}
                         Full-stack engineer turning
                         <span className="text-white"> ideas </span>
                         into clean, 
                             scalable products with strong
                         <span className="text-white"> execution</span>. 
-                                Building
-                        <span className="inline-block align-middle ml-2">
+                                Building {" "}
+                        <span className="inline-block align-middle m2">
                             <RotatingText texts={
                                     [
                                         "Scalable_Apps",
@@ -187,28 +196,11 @@ export default function HeroSection() {
                             ))
                         } </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
-            {/* 5. Hero Image Section (Unchanged) */}
-            <motion.div initial={
-                    {
-                        opacity: 0,
-                        scale: 0.9
-                    }
-                }
-                animate={
-                    {
-                        opacity: 1,
-                        scale: 1
-                    }
-                }
-                transition={
-                    {
-                        duration: 0.6,
-                        delay: 0.2
-                    }
-                }
+            {/* 5. Hero Image Section */}
+            <motion.div variants={itemVariants}
                 className="relative group self-center md:self-start">
                 <div className="absolute -top-4 -right-4 text-zinc-800 text-[10px] font-mono">FRM_024</div>
                 <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-blue-500/30 z-20"/>
@@ -232,11 +224,6 @@ export default function HeroSection() {
                 </div>
             </motion.div>
         </motion.section>
-        <footer className="py-4 mt-18 border-t border-white/5 text-center">
-            <p className="text-[10px] font-mono text-zinc-700 tracking-[0.4em] uppercase">
-                use navigation for more info
-            </p>
-        </footer>
         </>
     )
 }

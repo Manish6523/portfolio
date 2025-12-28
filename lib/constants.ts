@@ -171,9 +171,6 @@ export const NAV_LINKS: NavLink[] = [
     }, {
         name: "Contact",
         href: "/contact"
-    },{
-        name: "technical",
-        href: "/technical"
     }
 ];
 

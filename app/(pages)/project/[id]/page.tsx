@@ -1,295 +1,166 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PROJECTS, Project } from '@/lib/constants';
-import { Github, ExternalLink, ArrowLeft, X, Maximize2, Cpu, Terminal, Box, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { PROJECTS } from '@/lib/constants';
+import { Github, Terminal, Cpu, Box, Activity, ChevronLeft, Globe, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ProjectPage() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
   const params = useParams() as { id: string };
-  const project: Project | undefined = PROJECTS.find((p) => p.id === params.id);
-
-  // Scroll Progress for that "Leaky" loading bar feel
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedImage(null);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  const project = PROJECTS.find((p) => p.id === params.id);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   if (!project) return notFound();
 
-  const heroImage: string = project.images[0];
-  const galleryImages: string[] = project.images ;
-
-  // Scrolls the carousel to the image at index
-  const scrollToImage = (index: number) => {
-    if (carouselRef.current) {
-      const scrollChildren = carouselRef.current.children;
-      const clampedIndex = Math.max(0, Math.min(index, galleryImages.length - 1));
-      const child = scrollChildren[clampedIndex];
-      if (child) {
-        const childLeft = (child as HTMLElement).offsetLeft;
-        carouselRef.current.scrollTo({ left: childLeft - 24, behavior: 'smooth' }); // -24 due to px-6 (-mx-6 + px-6)
-      }
-    }
-  };
-
-  // Button handlers
-  const handleScrollLeft = () => {
-    let newIndex = carouselIndex - 1;
-    if (newIndex < 0) newIndex = galleryImages.length - 1;
-    setCarouselIndex(newIndex);
-    scrollToImage(newIndex);
-  };
-
-  const handleScrollRight = () => {
-    let newIndex = carouselIndex + 1;
-    if (newIndex >= galleryImages.length) newIndex = 0;
-    setCarouselIndex(newIndex);
-    scrollToImage(newIndex);
-  };
-
-  // Autoscroll effect
-  useEffect(() => {
-    if (galleryImages.length < 2) return;
-    const interval = setInterval(() => {
-      setCarouselIndex((prev) => {
-        let next = prev + 1;
-        if (next >= galleryImages.length) next = 0;
-        scrollToImage(next);
-        return next;
-      });
-    }, 3500);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line
-  }, [galleryImages.length]);
-
-  // Sync manual button navigation and index with scroll
-  useEffect(() => {
-    scrollToImage(carouselIndex);
-    // eslint-disable-next-line
-  }, [carouselIndex]);
-
-  // Snap the index to the nearest slide if user scrolls manually
-  useEffect(() => {
-    const ref = carouselRef.current;
-    if (!ref) return;
-    let timeout: NodeJS.Timeout | null = null;
-    const onScroll = () => {
-      // Delay until user stops scrolling
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const children = ref.children;
-        let closestIdx = 0;
-        let closestDistance = Infinity;
-        for (let i = 0; i < children.length; i++) {
-          const child = children[i] as HTMLElement;
-          const dist = Math.abs(child.offsetLeft - ref.scrollLeft);
-          if (dist < closestDistance) {
-            closestDistance = dist;
-            closestIdx = i;
-          }
-        }
-        setCarouselIndex(closestIdx);
-      }, 150);
-    };
-    ref.addEventListener('scroll', onScroll);
-    return () => {
-      ref.removeEventListener('scroll', onScroll);
-    };
-  }, []);
+  const nextSlide = () => setActiveIndex((prev) => (prev + 1) % project.images.length);
+  const prevSlide = () => setActiveIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
 
   return (
-    <main className="min-h-screen  text-zinc-400 font-mono selection:bg-blue-500/30 overflow-x-hidden">
-      
-      {/* 1. SYSTEM LOADING BAR */}
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-blue-600 z-[70] origin-left" style={{ scaleX }} />
-
-      {/* 2. LEAKY NAV */}
-      <nav className="fixed top-0 w-full z-[60] border-b border-white/5 bg-[#050505]/90 backdrop-blur-md px-4 py-3">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] tracking-widest">
-          <Link href="/" className="flex items-center gap-2 hover:text-white transition-colors group">
-            <span className="text-zinc-700">{"<"}</span> [ ROOT_DIR ]
-          </Link>
-          <div className="flex items-center gap-6">
-            <span className="hidden md:inline text-zinc-800 tracking-tighter">SYS/LOG/PRJ_{project.id.toUpperCase()}</span>
-            <div className="flex gap-4">
-               <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white uppercase">{"{"} GitHub {"}"}</a>
-               <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400 uppercase">{"{"} Live {"}"}</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* 3. HERO SECTION */}
-      <section className="relative pt-12 w-full aspect-video md:aspect-21/9 md:h-auto h-[50vh] border-b border-white/5 overflow-hidden">
-        <Image 
-          src={heroImage} 
-          alt="Hero" 
-          fill 
-          className="object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-1000"
-          priority
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#050505] to-transparent opacity-60" />
-        <div className="absolute bottom-12 left-6 md:left-12 space-y-4">
-            <div className="flex items-center gap-3">
-                <span className="text-[10px] text-blue-500 border border-blue-500/20 px-2 py-0.5 bg-blue-500/5 uppercase font-bold tracking-widest">
-                    {project.status}
-                </span>
-                <span className="text-[10px] text-zinc-800 uppercase tracking-widest">Build_{project.year}</span>
-            </div>
-            <h1 className="text-4xl sm:text-6xl md:text-9xl font-bold tracking-tighter text-white uppercase leading-none">
-                {project.title}
-            </h1>
-        </div>
-      </section>
-
-      {/* 4. CONTENT GRID */}
-      <div className="max-w-7xl mx-auto px-6 py-24 space-y-32">
+    <motion.main 
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-6"
+    >
+      <div className="max-w-4xl mx-auto space-y-20">
         
-        {/* NARRATIVE SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          <div className="lg:col-span-8 space-y-16">
-            <div className="space-y-6">
-                <div className="flex items-center gap-2">
-                    <Terminal className="w-3 h-3 text-blue-500" />
-                    <span className="text-[10px] uppercase text-zinc-600 tracking-[0.4em]">01 // Project_Manifest</span>
-                </div>
-                <p className="text-2xl md:text-4xl font-bold text-white tracking-tight leading-[1.1]">
-                    {project.overview}
-                </p>
+        {/* HEADER BLOCK (As refined previously) */}
+        <section className="space-y-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="space-y-4">
+              <Link href="/project" className="text-[10px] text-zinc-600 hover:text-blue-500 flex items-center gap-2 transition-colors">
+                <ChevronLeft size={12} /> [ RETURN_TO_REGISTRY ]
+              </Link>
+              <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
+                {project.title}
+              </h1>
             </div>
+            <div className="flex gap-3">
+              <a href={project.github} className="px-4 py-2 border border-zinc-900 bg-zinc-950 text-[10px] font-black uppercase hover:border-white transition-all">
+                <Github size={14} className="inline mr-2" /> Source
+              </a>
+              <a href={project.link} className="px-4 py-2 border border-blue-900 bg-blue-900/10 text-blue-500 text-[10px] font-black uppercase hover:bg-blue-500 hover:text-white transition-all">
+                <Globe size={14} className="inline mr-2" /> Live
+              </a>
+            </div>
+          </div>
+        </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-zinc-900 pt-12">
-                <div className="space-y-4">
-                    <span className="text-[10px] text-blue-500 font-bold uppercase tracking-widest">{"[ CHALLENGE ]"}</span>
-                    <p className="text-sm leading-relaxed text-zinc-500">{project.problemStatement}</p>
-                </div>
-                <div className="space-y-4">
-                    <span className="text-[10px] text-blue-500 font-bold uppercase tracking-widest">{"[ SOLUTION ]"}</span>
-                    <p className="text-sm leading-relaxed text-zinc-500">{project.solutionApproach}</p>
-                </div>
+        {/* --- SYSTEM ASSET VISUALIZER (The Carousel) --- */}
+        <section className="space-y-4">
+          <div className="flex justify-between items-center text-[10px] font-black text-zinc-700 uppercase">
+            <span className="flex items-center gap-2">
+              <Activity size={12} /> Asset_Frame_0{activeIndex + 1} // Total_{project.images.length}
+            </span>
+            <div className="flex gap-2">
+              <button onClick={prevSlide} className="p-2 border border-zinc-900 hover:bg-zinc-900"><ChevronLeft size={14}/></button>
+              <button onClick={nextSlide} className="p-2 border border-zinc-900 hover:bg-zinc-900"><ChevronRight size={14}/></button>
             </div>
           </div>
 
-          <aside className="lg:col-span-4 p-6 bg-[#080808] border border-zinc-900 rounded-sm space-y-8">
-            <h4 className="text-[10px] text-zinc-600 uppercase tracking-widest flex items-center gap-2">
-                <Cpu className="w-3 h-3" /> Stack_Log
-            </h4>
-            <div className="space-y-4">
-                {Object.entries(project.tech).map(([category, skills]) => (
-                    <div key={category}>
-                        <p className="text-[8px] text-zinc-800 uppercase mb-2">_{category}</p>
-                        <div className="flex flex-wrap gap-2">
-                            {(skills as string[]).map((s: string) => (
-                                <span key={s} className="text-[11px] text-zinc-400 bg-zinc-900 border border-white/5 px-2 py-1">{s}</span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
+          {/* Main Stage */}
+          <div className="relative aspect-video border border-zinc-900 bg-zinc-950 p-2 group">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeIndex}
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                transition={{ duration: 0.3 }}
+                className="relative h-full w-full grayscale group-hover:grayscale-0 transition-all duration-700"
+              >
+                <Image 
+                  src={project.images[activeIndex]} 
+                  alt="Asset Preview" 
+                  fill 
+                  className="object-cover opacity-60 group-hover:opacity-100 transition-opacity"
+                />
+              </motion.div>
+            </AnimatePresence>
+            {/* Visual Metadata Overlay */}
+            <div className="absolute bottom-6 right-6 px-3 py-1 bg-black/80 border border-zinc-800 text-[9px] text-zinc-500 font-bold uppercase">
+              {project.images[activeIndex].split('/').pop()}
             </div>
-          </aside>
-        </div>
+          </div>
 
-        {/* 5. INTERACTIVE CAROUSEL SECTION */}
+          {/* Thumbnail Buffer Track */}
+          <div className="grid grid-cols-5 md:grid-cols-10 gap-2 h-12">
+            {project.images.map((img, i) => (
+              <button 
+                key={i} 
+                onClick={() => setActiveIndex(i)}
+                className={`relative h-full border transition-all ${activeIndex === i ? 'border-blue-600 opacity-100 scale-105 z-10' : 'border-zinc-900 opacity-30 hover:opacity-60'}`}
+              >
+                <Image src={img} alt="Thumb" fill className="object-cover" />
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* NARRATIVE & LOGS */}
+        <section className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-zinc-900 pt-16">
+          <div className="md:col-span-12 space-y-4">
+            <span className="text-[10px] font-black text-zinc-700 uppercase tracking-widest flex items-center gap-2">
+              <Terminal size={12} className="text-blue-500" /> 01_Manifest_Summary
+            </span>
+            <p className="text-2xl md:text-3xl font-black text-white italic leading-tight">
+              {project.overview}
+            </p>
+          </div>
+          
+          <div className="md:col-span-6 p-6 border border-zinc-900 bg-zinc-950/20">
+            <h4 className="text-[10px] text-blue-900 font-black uppercase mb-4">{"// Input_Challenge"}</h4>
+            <p className="text-sm leading-relaxed text-zinc-500">{project.problemStatement}</p>
+          </div>
+          <div className="md:col-span-6 p-6 border border-zinc-900 bg-zinc-950/20">
+            <h4 className="text-[10px] text-emerald-900 font-black uppercase mb-4">{"// Output_Logic"}</h4>
+            <p className="text-sm leading-relaxed text-zinc-500">{project.solutionApproach}</p>
+          </div>
+        </section>
+
+        {/* INFRASTRUCTURE */}
         <section className="space-y-8">
-            <div className="flex justify-between items-end">
-                <div className="space-y-2">
-                    <span className="text-[10px] uppercase text-zinc-600 tracking-[0.4em]">02 // Interface_Logs</span>
-                    <h3 className="text-2xl font-bold text-white uppercase tracking-tighter">Asset_Visualizer</h3>
-                </div>
-                <div className="flex gap-2">
-                    <button onClick={handleScrollLeft} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
-                        <ChevronLeft className="w-4 h-4 text-zinc-400" />
-                    </button>
-                    <button onClick={handleScrollRight} className="p-2 cursor-pointer border border-zinc-800 hover:bg-zinc-900 transition-colors" type="button">
-                        <ChevronRight className="w-4 h-4 text-zinc-400" />
-                    </button>
-                </div>
-            </div>
-
-            <div 
-                ref={carouselRef}
-                className="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8 -mx-6 px-6 cursor-grab active:cursor-grabbing"
-            >
-                {galleryImages.map((img: string, i: number) => (
-                    <motion.div 
-                        key={i}
-                        whileHover={{ y: -5 }}
-                        onClick={() => setSelectedImage(img)}
-                        className={`relative min-w-[300px] md:min-w-[600px] aspect-video bg-zinc-900 border border-zinc-800 snap-center overflow-hidden shrink-0 group `}
-                    >
-                        <div className="absolute top-2 left-2 z-10 text-[10px] text-zinc-300 uppercase tracking-tighter bg-black/40 px-1">
-                            LOG_ID: {img.split('.')[0]}
-                        </div>
-                        <Image 
-                            src={img} 
-                            alt={`Slide ${i}`} 
-                            fill 
-                            className="object-cover opacity-50  group-hover:opacity-100 transition-all duration-700" 
-                        />
-                        <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <Maximize2 className="w-6 h-6 text-white" />
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
+           <div className="flex items-center gap-3">
+             <Cpu size={14} className="text-zinc-700" />
+             <span className="text-[10px] font-black text-zinc-700 uppercase tracking-widest">Stack_Registry</span>
+             <div className="h-px flex-1 bg-zinc-900" />
+           </div>
+           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+             {Object.entries(project.tech).map(([category, skills]) => (
+               <div key={category} className="space-y-3">
+                 <p className="text-[9px] text-zinc-800 font-black uppercase tracking-widest">_{category}</p>
+                 <div className="flex flex-wrap gap-1.5">
+                   {(skills as string[]).map((s) => (
+                     <span key={s} className="text-[9px] font-bold text-zinc-400 border border-zinc-900 px-2 py-0.5 bg-black/40 uppercase">
+                       {s}
+                     </span>
+                   ))}
+                 </div>
+               </div>
+             ))}
+           </div>
         </section>
 
         {/* OUTCOMES LOG */}
-        <section className="border-t border-zinc-900 pt-24 pb-12">
-            <div className="space-y-12">
-                <div className="flex items-center gap-2">
-                    <Box className="w-3 h-3 text-blue-500" />
-                    <span className="text-[10px] uppercase text-zinc-600 tracking-[0.4em]">03 // Deployment_Outcomes</span>
-                </div>
-                <ul className="space-y-8">
-                    {project.outcomes.map((outcome: string, i: number) => (
-                        <li key={i} className="flex gap-6 items-start group">
-                            <span className="text-blue-600 font-bold text-lg mt-1 group-hover:translate-x-1 transition-transform">↳</span>
-                            <p className="text-xl md:text-3xl text-zinc-300 font-bold tracking-tighter italic">
-                                {outcome}
-                            </p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+        <section className="space-y-8 pb-32">
+          <div className="flex items-center gap-3">
+            <Box size={14} className="text-emerald-500" />
+            <span className="text-[10px] font-black text-zinc-700 uppercase tracking-widest">System_Outcomes</span>
+          </div>
+          <div className="divide-y divide-zinc-900 border border-zinc-900">
+            {project.outcomes.map((outcome, i) => (
+              <div key={i} className="flex gap-6 p-6 bg-zinc-950/30 group hover:bg-zinc-950 transition-colors">
+                <span className="text-blue-600 font-black text-xs">[ SUCCESS_0{i+1} ]</span>
+                <p className="text-lg text-zinc-300 font-black uppercase tracking-tight italic">
+                  {outcome}
+                </p>
+              </div>
+            ))}
+          </div>
         </section>
 
       </div>
-
-      {/* LIGHTBOX MODAL (REMAIN UNCHANGED) */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/98 backdrop-blur-2xl p-4 flex items-center justify-center cursor-zoom-out"
-            onClick={() => setSelectedImage(null)}
-          >
-            <div className="absolute top-8 right-8 text-[10px] text-zinc-500 tracking-widest uppercase">[ CLOSE_VIEW ]</div>
-            <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="relative w-full max-w-6xl aspect-video" onClick={(e) => e.stopPropagation()}>
-              <Image src={selectedImage} alt="Fullscreen" fill className="object-contain" priority />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <footer className="py-24 border-t border-zinc-900 text-center">
-         <Link href="/" className="text-[8px] sm:text-[10px] text-800 hover:text-blue-500 transition-all uppercase tracking-[1em]">
-            [ RE_INITIALIZE_MANIFEST ]
-         </Link>
-      </footer>
-    </main>
+    </motion.main>
   );
 }

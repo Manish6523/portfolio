@@ -3,6 +3,7 @@ import './globals.css';
 import CustomCursor from "@/components/ui/CustomCursor";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // app/layout.tsx
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* <CustomCursor /> */}
             {children}
           </AnimatePresence>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
