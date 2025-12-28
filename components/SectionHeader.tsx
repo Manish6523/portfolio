@@ -22,8 +22,9 @@ export default function SectionHeader({
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
+      // viewport={{ amount: 0.5 }}
       transition={{ duration: 0.6 }}
-      className={`space-y-1 ${className}`}
+      className={`space-y-1 pt-12 ${className}`}
     >
       <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600">
         {number} // {label}

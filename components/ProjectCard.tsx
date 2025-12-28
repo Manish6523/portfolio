@@ -77,11 +77,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               </span>
             </div>
 
-            <h3 className="text-4xl md:text-5xl font-bold tracking-tighter text-white group-hover:text-blue-500 transition-colors leading-none">
+            <Link href={`/project/${project.id}`}  className="text-4xl md:text-5xl font-bold tracking-tighter text-white group-hover:text-blue-500 transition-colors leading-none">
               {project.title}
-            </h3>
+            </Link>
 
-            <p className="text-[10px] text-zinc-500 uppercase tracking-widest">
+            <p className="text-[10px] text-zinc-500 uppercase tracking-widest mt-1">
               {project.role} @ {project.client}
             </p>
           </div>
