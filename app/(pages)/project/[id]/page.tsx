@@ -5,13 +5,14 @@ import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS } from '@/lib/constants';
-import { Github, Terminal, Cpu, Box, Activity, ChevronLeft, Globe, ChevronRight } from 'lucide-react';
+import { Github, Terminal, Cpu, Box, Activity, ChevronLeft, Globe, ChevronRight, X, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ProjectPage() {
   const params = useParams() as { id: string };
   const project = PROJECTS.find((p) => p.id === params.id);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
 
   if (!project) return notFound();
 
@@ -21,7 +22,7 @@ export default function ProjectPage() {
   return (
     <motion.main 
       initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-6"
+      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-24 md:pt-32 px-3"
     >
       <div className="max-w-4xl mx-auto space-y-20">
         
@@ -32,7 +33,7 @@ export default function ProjectPage() {
               <Link href="/project" className="text-[10px] text-zinc-600 hover:text-blue-500 flex items-center gap-2 transition-colors">
                 <ChevronLeft size={12} /> [ RETURN_TO_REGISTRY ]
               </Link>
-              <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
+              <h1 className="text-3xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
                 {project.title}
               </h1>
             </div>
@@ -54,13 +55,19 @@ export default function ProjectPage() {
               <Activity size={12} /> Asset_Frame_0{activeIndex + 1} // Total_{project.images.length}
             </span>
             <div className="flex gap-2">
-              <button onClick={prevSlide} className="p-2 border border-zinc-900 hover:bg-zinc-900"><ChevronLeft size={14}/></button>
-              <button onClick={nextSlide} className="p-2 border border-zinc-900 hover:bg-zinc-900"><ChevronRight size={14}/></button>
+              <button onClick={prevSlide} className="cursor-pointer p-2 border border-zinc-900 hover:bg-zinc-900"><ChevronLeft size={14}/></button>
+              <button onClick={nextSlide} className="cursor-pointer p-2 border border-zinc-900 hover:bg-zinc-900"><ChevronRight size={14}/></button>
             </div>
           </div>
 
           {/* Main Stage */}
-          <div className="relative aspect-video border border-zinc-900 bg-zinc-950 p-2 group">
+          <div 
+            className="relative aspect-video border border-zinc-900 bg-zinc-950 p-2 group cursor-pointer"
+            onClick={() => setShowPreview(true)}
+            tabIndex={0}
+            aria-label="Preview Image"
+            role="button"
+          >
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeIndex}
@@ -68,29 +75,76 @@ export default function ProjectPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
                 transition={{ duration: 0.3 }}
-                className="relative h-full w-full grayscale group-hover:grayscale-0 transition-all duration-700"
+                className="relative h-full w-full transition-all duration-700"
               >
                 <Image 
                   src={project.images[activeIndex]} 
                   alt="Asset Preview" 
                   fill 
                   className="object-cover opacity-60 group-hover:opacity-100 transition-opacity"
+                  priority
                 />
               </motion.div>
             </AnimatePresence>
             {/* Visual Metadata Overlay */}
             <div className="absolute bottom-6 right-6 px-3 py-1 bg-black/80 border border-zinc-800 text-[9px] text-zinc-500 font-bold uppercase">
-              {project.images[activeIndex].split('/').pop()}
+              {project.images[activeIndex].split('/').pop()?.split('.')[0]}
+            </div>
+
+            <div className="hidden group-hover:block absolute top-6 right-6 p-1 bg-black/80 border border-zinc-800 text-[9px] text-zinc-500 font-bold uppercase">
+              <Maximize2 size={18} />
             </div>
           </div>
 
+          {/* Preview Modal */}
+          <AnimatePresence>
+            {showPreview && (
+              <motion.div
+                key="modal"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-200 flex items-center justify-center bg-black/80"
+                onClick={() => setShowPreview(false)}
+                aria-modal="true"
+                role="dialog"
+              >
+                <div
+                  className="relative max-w-3xl w-full flex flex-col items-end"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setShowPreview(false)}
+                    className="absolute cursor-pointer top-2 right-2 z-20 p-2 bg-black/60 rounded-full text-zinc-300 hover:text-white hover:bg-zinc-900 transition"
+                    aria-label="Close Preview"
+                  >
+                    <X size={18} />
+                  </button>
+                  <div className="w-full relative aspect-video bg-zinc-900 overflow-hidden border border-zinc-700 flex items-center justify-center">
+                    <Image
+                      src={project.images[activeIndex]}
+                      alt="Asset Preview Full"
+                      fill
+                      className="object-contain"
+                      sizes="(min-width: 768px) 80vw, 95vw"
+                      priority
+                    />
+                  </div>
+                  <div className="mt-3 text-xs text-zinc-300 w-full px-2 text-center truncate">
+                    {project.images[activeIndex].split('/').pop()?.split(".")[0]}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Thumbnail Buffer Track */}
-          <div className="grid grid-cols-5 md:grid-cols-10 gap-2 h-12">
+          <div className="grid grid-cols-5 md:grid-cols-10 gap-2 h-24 md:h-12">
             {project.images.map((img, i) => (
               <button 
                 key={i} 
                 onClick={() => setActiveIndex(i)}
-                className={`relative h-full border transition-all ${activeIndex === i ? 'border-blue-600 opacity-100 scale-105 z-10' : 'border-zinc-900 opacity-30 hover:opacity-60'}`}
+                className={`relative cursor-pointer h-full border transition-all ${activeIndex === i ? 'border-blue-600 opacity-100 scale-105 z-10' : 'border-zinc-900 opacity-30 hover:opacity-60'}`}
               >
                 <Image src={img} alt="Thumb" fill className="object-cover" />
               </button>

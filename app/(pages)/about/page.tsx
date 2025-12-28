@@ -70,7 +70,7 @@ export default function AboutManifest() {
       variants={containerVariants}
       initial="initial"
       animate="animate"
-      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-24 pb-20 px-6"
+      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-24 pb-20 px-3"
     >
       <div className="max-w-4xl mx-auto">
         

@@ -24,7 +24,7 @@ export default function TimelinePage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-6"
+      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-3"
     >
       <div className="max-w-4xl mx-auto space-y-20">
         
@@ -36,7 +36,7 @@ export default function TimelinePage() {
                Temporal_Registry // Career_Logs
              </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
+          <h1 className="text-3xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
             Execution_History
           </h1>
           <p className="max-w-xl text-sm mt-6 leading-relaxed text-zinc-500 italic">
@@ -51,7 +51,7 @@ export default function TimelinePage() {
             <motion.section 
               key={index}
               variants={itemVariants}
-              className="grid grid-cols-1 md:grid-cols-12 gap-8 p-10 bg-black hover:bg-zinc-950/50 transition-colors group"
+              className="grid grid-cols-1 md:grid-cols-12 gap-8 p-5 md:p-10 bg-black hover:bg-zinc-950/50 transition-colors group"
             >
               {/* DATE COLUMN */}
               <div className="md:col-span-3 space-y-2">
@@ -100,13 +100,6 @@ export default function TimelinePage() {
             </motion.section>
           ))}
         </div>
-
-        {/* FOOTER METADATA */}
-        <motion.footer variants={itemVariants} className="pt-20 text-center">
-           <div className="inline-block px-4 py-1 border border-zinc-900 text-[9px] text-zinc-800 font-black uppercase tracking-[0.5em]">
-             End_Of_Temporal_Data // Manish_Sharma.v3
-           </div>
-        </motion.footer>
       </div>
     </motion.main>
   );

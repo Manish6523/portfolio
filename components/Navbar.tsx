@@ -5,10 +5,12 @@ import { NAV_LINKS } from '@/lib/constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Terminal as TerminalIcon } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(typeof window !== "undefined" ? window.navigator.onLine : true);
+  const pathname = usePathname();
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -37,6 +39,15 @@ const Navbar = () => {
     };
   }, []);
 
+  // Utility to check active state (treating trailing slashes as equivalent)
+  function isLinkActive(href: string) {
+    // Special case homepage: treat "/" and "" or pathname === "/"
+    if (href === "/" && pathname === "/") return true;
+    // Remove any trailing slash for comparison
+    const normalize = (path: string) => path.replace(/\/$/, "");
+    return normalize(pathname) === normalize(href);
+  }
+
   return (
     <nav className="fixed top-0 z-100 w-full border-b border-white/5 bg-black/60 backdrop-blur-xl font-mono">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -52,16 +63,23 @@ const Navbar = () => {
 
         {/* DESKTOP NAV */}
         <div className="hidden md:flex gap-10 text-[10px] font-bold items-center uppercase tracking-widest">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-1 "
-            >
-              <span className="text-[8px] text-zinc-800 tracking-tighter">0{NAV_LINKS.indexOf(link) + 1}</span>
-              {link.name}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = isLinkActive(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`transition-colors flex items-center gap-1 ${
+                  active
+                    ? "text-blue-500"
+                    : "text-zinc-500 hover:text-blue-500"
+                }`}
+              >
+                <span className="text-[8px] text-zinc-800 tracking-tighter">0{NAV_LINKS.indexOf(link) + 1}</span>
+                {link.name}
+              </Link>
+            );
+          })}
           <div className="h-4 w-px bg-zinc-800" />
           {isOnline ? (
             <span className="text-[8px] text-green-500 animate-pulse tracking-tighter uppercase">Sys_Online</span>
@@ -99,24 +117,31 @@ const Navbar = () => {
               </div>
               
               <div className="flex flex-col gap-8">
-                {NAV_LINKS.map((link, i) => (
-                  <motion.div
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + i * 0.1 }}
-                    key={link.name}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-4xl font-bold text-white uppercase tracking-tighter flex items-end gap-4 group"
+                {NAV_LINKS.map((link, i) => {
+                  const active = isLinkActive(link.href);
+                  return (
+                    <motion.div
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.1 + i * 0.1 }}
+                      key={link.name}
                     >
-                      <span className="text-xs text-blue-600 mb-1 font-mono">0{i + 1}</span>
-                      {link.name}
-                      <div className="h-[1px] flex-1 bg-zinc-900 group-hover:bg-blue-600 transition-colors mb-3" />
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`text-4xl font-bold uppercase tracking-tighter flex items-end gap-4 group transition-colors ${
+                          active ? "text-blue-500" : "text-white"
+                        }`}
+                      >
+                        <span className="text-xs text-blue-600 mb-1 font-mono">0{i + 1}</span>
+                        {link.name}
+                        <div className={`h-[1px] flex-1 ${
+                          active ? "bg-blue-600" : "bg-zinc-900 group-hover:bg-blue-600"
+                        } transition-colors mb-3`} />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
 

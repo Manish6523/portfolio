@@ -38,7 +38,7 @@ export default function ProjectsPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-6"
+      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-3"
     >
       <div className="max-w-4xl mx-auto space-y-16">
         
