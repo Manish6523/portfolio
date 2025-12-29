@@ -14,7 +14,7 @@ import {
 import SplitText from '@/components/react-bits/SplitText'
 import RotatingText from '../react-bits/RotatingText'
 import Link from 'next/link'
-import {motion} from 'framer-motion'
+import {motion, Variants} from 'framer-motion'
 import {useCursorActivity} from '@/lib/lanyard'
 
 // Animation Variants
@@ -29,13 +29,13 @@ const containerVariants = {
     }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
     visible: { 
         opacity: 1, 
         y: 0, 
         filter: "blur(0px)",
-        transition: { duration: 0.6, ease: "easeOut" } 
+        transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } 
     }
 };
 
