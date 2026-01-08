@@ -107,7 +107,7 @@ export const PROJECTS: Project[] = [
     id: "legacy-gifts",
     title: "Legacy Gifts",
     client: "Karmadude IT Solutions",
-    role: "Full Stack Intern",
+    role: "Jr React Intern",
     year: "2025",
     status: "Internship",
     description:
@@ -161,7 +161,7 @@ export const PROJECTS: Project[] = [
 
 export const TIMELINE: TimelineEntry[] = [
   {
-    period: "2025 — PRESENT",
+    period: "2025 — 2025",
     title: "Web Development Intern",
     company: "Karmadude IT Solutions",
     description:
