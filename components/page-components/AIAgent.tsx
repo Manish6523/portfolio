@@ -127,6 +127,25 @@ export default function AIAgent() {
     }
   };
 
+useEffect(() => {
+  // Use document.body directly for better reliability
+  const body = document.body;
+
+  if (isOpen) {
+    body.style.overflow = 'hidden';
+  } else {
+    body.style.overflow = '';
+    body.style.paddingRight = '';
+  }
+
+  // CLEANUP: If the user navigates away or component unmounts, 
+  // we MUST re-enable scrolling.
+  return () => {
+    body.style.overflow = '';
+    body.style.paddingRight = '';
+  };
+}, [isOpen]);
+
   return (
     <>
       <button
@@ -144,7 +163,7 @@ export default function AIAgent() {
           <motion.div
             initial={{ opacity: 0.5, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.9 }}
+            exit={{ opacity: 0.5, y: 30, scale: 0.9 }}
             transition={{ duration: 0.2 }}
             className="fixed bottom-20 right-6 z-[100] w-[calc(100vw-3rem)] sm:w-[420px] h-[600px] bg-black/80 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden font-mono backdrop-blur-2xl"
           >
