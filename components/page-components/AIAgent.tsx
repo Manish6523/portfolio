@@ -42,7 +42,7 @@ const CopyButton = ({ content }: { content: string }) => {
         document.execCommand('copy');
         textArea.remove();
       }
-      
+
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -132,7 +132,7 @@ export default function AIAgent() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-[100] p-3 cursor-pointer bg-blue-500 text-black rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] hover:scale-105 active:scale-95 transition-all md:animate-none 
-          ${!isOpen?'animate-bounce':'animate-none'} `}
+          ${!isOpen ? 'animate-bounce' : 'animate-none'} `}
       >
         {isOpen
           ? <X className="text-white size-3 md:size-5" />
@@ -145,7 +145,7 @@ export default function AIAgent() {
             initial={{ opacity: 0.5, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.9 }}
-            transition={{duration:0.2}}
+            transition={{ duration: 0.2 }}
             className="fixed bottom-20 right-6 z-[100] w-[calc(100vw-3rem)] sm:w-[420px] h-[600px] bg-black/80 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden font-mono backdrop-blur-2xl"
           >
             {/* NEW HEADER DESIGN */}
@@ -172,7 +172,7 @@ export default function AIAgent() {
             </div>
 
             {/* CHAT AREA */}
-            <div ref={scrollRef} className="flex-1 p-5 overflow-y-auto space-y-6 no-scrollbar">
+            <div ref={scrollRef} className="flex-1 p-3 md:p-5 overflow-y-auto space-y-6 no-scrollbar">
               {messages.length === 0 && !isLoading && (
                 <div className="space-y-6 mt-4">
                   <div className="p-4 rounded-xl border border-blue-500/20 bg-blue-500/5">
@@ -199,17 +199,33 @@ export default function AIAgent() {
 
               {messages.map((m, i) => (
                 <div key={i} className={`flex relative mb-4 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[95%] md:max-w-[85%] p-4 text-[11px] leading-relaxed group relative transition-all ${m.role === 'user'
-                      ? 'bg-blue-600 text-black font-bold rounded-2xl rounded-tr-none'
-                      : 'bg-white/5 text-zinc-200 border border-white/10 rounded-2xl rounded-tl-none'
+                  <div className={`max-w-[100%] md:max-w-[95%] p-4 text-[11px] leading-relaxed group relative transition-all ${m.role === 'user'
+                    ? 'bg-blue-600 text-black font-bold rounded-2xl rounded-tr-none'
+                    : 'bg-white/5 text-zinc-200 border border-white/10 rounded-2xl rounded-tl-none'
                     }`}>
                     {m.role === 'assistant' ? (
-                      <div className="prose prose-invert prose-xs break-words overflow-x-scroll pr-4">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
-                          a: (props) => <a {...props} target="_blank" className="text-blue-400 underline" />,
-                          ul: (props) => <ul {...props} className="list-disc ml-3 mt-2" />,
-                          strong: (props) => <span {...props} className="text-white font-black" />
-                        }}>
+                      <div className="prose prose-invert prose-xs break-words overflow-x-scroll pr-">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            a: (props) => <a {...props} target="_blank" className="text-blue-400 underline" />,
+                            ul: (props) => <ul {...props} className="list-disc ml-3 mt-2" />,
+                            strong: (props) => <span {...props} className="text-white font-black" />,
+                            // Table styling
+                            table: (props) => (
+                              <div className="overflow-x-auto my-3">
+                                <table {...props} className="border-collapse border border-white/20 w-screen max-w-lg md:w-auto" />
+                              </div>
+                            ),
+                            thead: (props) => <thead {...props} className="bg-white/10" />,
+                            th: (props) => (
+                              <th {...props} className="border border-white/20 p-1 text-left font-bold" />
+                            ),
+                            td: (props) => (
+                              <td {...props} className="border border-white/20 p-1" />
+                            ),
+                          }}
+                        >
                           {m.content}
                         </ReactMarkdown>
 
