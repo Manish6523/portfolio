@@ -1,8 +1,9 @@
 "use client";
 
+import { Check } from 'lucide-react'; // Make sure to import Check
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Terminal, Bot, Sparkles, Trash2, History } from 'lucide-react';
+import { MessageSquare, X, Send, Terminal, Bot, Sparkles, Trash2, History, Copy } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { AIResponse } from "@/app/actions";
@@ -17,6 +18,57 @@ const PREMADE_QUESTIONS = [
   { label: "SOCIAL_LINKS", query: "Where can I find your social media or professional profiles?" },
   { label: "MOTIVATION", query: "What drives you as a developer?" },
 ];
+
+
+
+const CopyButton = ({ content }: { content: string }) => {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopy = async () => {
+    try {
+      // Modern API
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(content);
+      } else {
+        // Fallback for older mobile browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = content;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        textArea.remove();
+      }
+      
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      // Removed opacity-0 and group-hover:opacity-100 so it's always visible
+      // Added md:opacity-0 md:group-hover:opacity-100 to keep it hidden on desktop until hover if you prefer
+      className="absolute cursor-pointer top-2 right-2 p-2 bg-zinc-800/90 border border-white/10 rounded-lg transition-all hover:bg-zinc-700 active:scale-95 flex items-center gap-2 z-10 shadow-lg md:opacity-0 md:group-hover:opacity-100 transition-all"
+      title="Copy message"
+    >
+      {copied ? (
+        <>
+          <span className="text-[9px] text-green-400 font-bold uppercase tracking-tighter">Copied</span>
+          <Check className="size-3 text-green-400" strokeWidth='4' />
+        </>
+      ) : (
+        <Copy className="size-3 text-zinc-300" />
+      )}
+    </button>
+  );
+};
 
 export default function AIAgent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,22 +129,24 @@ export default function AIAgent() {
 
   return (
     <>
-      <button 
-        onClick={() => setIsOpen(!isOpen)} 
-        className="fixed bottom-6 right-6 z-[100] p-3 sm:p-4 bg-blue-600 text-black rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] hover:scale-110 active:scale-95 transition-all cursor-none"
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed bottom-6 right-6 z-[100] p-3 cursor-pointer bg-blue-500 text-black rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] hover:scale-105 active:scale-95 transition-all md:animate-none 
+          ${!isOpen?'animate-bounce':'animate-none'} `}
       >
-        {isOpen 
-          ? <X className="w-5 h-5 sm:w-6 sm:h-6" />
-          : <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />}
+        {isOpen
+          ? <X className="text-white size-3 md:size-5" />
+          : <MessageSquare className="text-white size-3 md:size-5" />}
       </button>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: 30, scale: 0.9 }} 
-            animate={{ opacity: 1, y: 0, scale: 1 }} 
+          <motion.div
+            initial={{ opacity: 0.5, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.9 }}
-            className="fixed bottom-24 right-6 z-[100] w-[calc(100vw-3rem)] sm:w-[420px] h-[600px] bg-black/80 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden font-mono backdrop-blur-2xl"
+            transition={{duration:0.2}}
+            className="fixed bottom-20 right-6 z-[100] w-[calc(100vw-3rem)] sm:w-[420px] h-[600px] bg-black/80 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden font-mono backdrop-blur-2xl"
           >
             {/* NEW HEADER DESIGN */}
             <div className="p-4 border-b border-white/5 bg-white/5 flex justify-between items-center">
@@ -112,7 +166,7 @@ export default function AIAgent() {
                   </button>
                 )}
                 <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/5 rounded-lg transition-colors">
-                  <X className="w-4 h-4 text-zinc-500" />
+                  <X className="w-4 h-4 text-zinc-500 cursor-pointer" />
                 </button>
               </div>
             </div>
@@ -134,7 +188,7 @@ export default function AIAgent() {
                       <button
                         key={idx}
                         onClick={() => handleSend(undefined, item.query)}
-                        className="w-fit mr-1 text-left p-2 text-[10px] bg-white/5 hover:bg-blue-600/10 border border-white/5 hover:border-blue-500/30 rounded-xl text-zinc-400 hover:text-blue-400 transition-all cursor-none"
+                        className="w-fit cursor-pointer mr-1 text-left p-2 text-[10px] bg-white/5 hover:bg-blue-600/10 border border-white/5 hover:border-blue-500/30 rounded-xl text-zinc-400 hover:text-blue-400 transition-all  "
                       >
                         {item.label}
                       </button>
@@ -144,14 +198,13 @@ export default function AIAgent() {
               )}
 
               {messages.map((m, i) => (
-                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[95%] md:max-w-[88%] p-4 text-[11px] leading-relaxed ${
-                    m.role === 'user' 
-                      ? 'bg-blue-600 text-black font-bold rounded-2xl rounded-tr-none' 
+                <div key={i} className={`flex relative mb-4 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[95%] md:max-w-[85%] p-4 text-[11px] leading-relaxed group relative transition-all ${m.role === 'user'
+                      ? 'bg-blue-600 text-black font-bold rounded-2xl rounded-tr-none'
                       : 'bg-white/5 text-zinc-200 border border-white/10 rounded-2xl rounded-tl-none'
-                  }`}>
+                    }`}>
                     {m.role === 'assistant' ? (
-                      <div className="prose prose-invert prose-xs wrap-break-word">
+                      <div className="prose prose-invert prose-xs break-words overflow-x-scroll pr-4">
                         <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
                           a: (props) => <a {...props} target="_blank" className="text-blue-400 underline" />,
                           ul: (props) => <ul {...props} className="list-disc ml-3 mt-2" />,
@@ -159,12 +212,17 @@ export default function AIAgent() {
                         }}>
                           {m.content}
                         </ReactMarkdown>
+
+                        {/* Proper Copy Button */}
+                        <CopyButton content={m.content} />
                       </div>
-                    ) : m.content}
+                    ) : (
+                      m.content
+                    )}
                   </div>
                 </div>
               ))}
-              
+
               {isLoading && (
                 <div className="flex items-center gap-2 text-[10px] text-blue-500 font-bold uppercase animate-pulse">
                   <Terminal className="w-3 h-3" /> fetching_packets...
@@ -175,14 +233,14 @@ export default function AIAgent() {
             {/* INPUT */}
             <form onSubmit={handleSend} className="p-4 bg-white/5 border-t border-white/5">
               <div className="flex items-center gap-3 bg-black/40 border border-white/10 px-4 py-3 rounded-2xl focus-within:border-blue-500/50 transition-all">
-                <input 
-                  value={input} 
-                  onChange={(e) => setInput(e.target.value)} 
-                  placeholder="Execute query..." 
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Execute query..."
                   className="flex-1 bg-transparent text-[11px] text-white outline-none placeholder:text-zinc-600"
                 />
                 <button type="submit" disabled={isLoading}>
-                  <Send className={`w-4 h-4 ${isLoading ? 'text-zinc-800' : 'text-blue-500'}`} />
+                  <Send className={`w-4 h-4 cursor-pointer ${isLoading ? 'text-zinc-800' : 'text-blue-500'}`} />
                 </button>
               </div>
             </form>

@@ -106,7 +106,7 @@ export default function AboutManifest() {
               <div className="space-y-12">
                 {CAPABILITIES.map((cap) => (
                   <motion.div variants={itemVariants} key={cap.id} className="group relative pl-8 border-l border-zinc-900 hover:border-blue-600 transition-colors">
-                    <div className="absolute -left-[1px] top-0 h-4 w-px bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute -left-px top-0 h-4 w-px bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="flex items-center gap-3 mb-3">
                       <span className="text-[10px] text-zinc-700 font-black">{cap.id}</span>
                       <h3 className="text-white text-sm font-black uppercase tracking-widest">{cap.title}</h3>
