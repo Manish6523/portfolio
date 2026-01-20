@@ -3,9 +3,14 @@ import {useEffect, useState} from "react";
 import ClickSpark from "@/components/react-bits/ClickSpark";
 import HeroSection from "@/components/page-components/HeroSection";
 import AIAgent from "@/components/page-components/AIAgent";
+import { useTheme } from "next-themes";
 
 export default function Portfolio() {
+    const { setTheme } = useTheme();
     const [hasMounted, setHasMounted] = useState(false);
+    useEffect(()=>{
+        setTheme('dark');
+    },[])
 
     useEffect(() => {
         setHasMounted(true);
