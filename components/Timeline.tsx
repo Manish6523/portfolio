@@ -15,16 +15,16 @@ const experiences = [
 ];
 
 export const Timeline = () => (
-  <section className="py-20 border-t border-white/5">
-    <h2 className="text-sm font-mono uppercase tracking-widest text-zinc-500 mb-12">History</h2>
+  <section className="py-20 border-t border-zinc-300 dark:border-white/5">
+    <h2 className="text-sm font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-500 mb-12">History</h2>
     <div className="space-y-12">
       {experiences.map((exp, i) => (
         <div key={i} className="flex flex-col md:flex-row gap-4 md:gap-20">
-          <p className="text-zinc-500 font-mono text-xs w-32">{exp.date}</p>
+          <p className="text-zinc-600 dark:text-zinc-500 font-mono text-xs w-32">{exp.date}</p>
           <div>
-            <h3 className="text-white font-bold">{exp.title}</h3>
-            <p className="text-zinc-400 text-sm">{exp.company}</p>
-            <p className="mt-2 text-zinc-500 max-w-lg text-sm">{exp.description}</p>
+            <h3 className="text-black dark:text-white font-bold">{exp.title}</h3>
+            <p className="text-zinc-700 dark:text-zinc-400 text-sm">{exp.company}</p>
+            <p className="mt-2 text-zinc-700 dark:text-zinc-500 max-w-lg text-sm">{exp.description}</p>
           </div>
         </div>
       ))}

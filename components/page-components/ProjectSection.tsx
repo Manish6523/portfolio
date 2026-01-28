@@ -17,7 +17,7 @@ export default function ProjectSection() {
       transition={{ duration: 0.6 }}
       className="mb-32 font-mono"
     >
-      <div className="pt-20 border-t border-white/5">
+      <div className="pt-20 border-t border-zinc-300 dark:border-white/5">
         
         {/* Section Header */}
         <div className="flex justify-between items-end mb-16">
@@ -26,7 +26,7 @@ export default function ProjectSection() {
             label="Production_Deployments"
             title="Deployment_History.log"
           />
-          <div className="text-right hidden md:block text-[9px] text-zinc-800 uppercase tracking-widest">
+          <div className="text-right hidden md:block text-[9px] text-zinc-700 dark:text-zinc-800 uppercase tracking-widest">
             Total_Entries: {PROJECTS.length}
           </div>
         </div>

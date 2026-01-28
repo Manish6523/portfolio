@@ -53,7 +53,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pt-20 border-t border-white/5 font-mono overflow-hidden">
+    <section id="contact" className="pt-20 border-t border-zinc-300 dark:border-white/5 font-mono overflow-hidden">
       <div className="max-w-7xl mx-auto ">
 
         {/* SECTION HEADER */}
@@ -68,47 +68,47 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
           {/* LEFT: The Terminal Input Form */}
-          <div className="bg-zinc-950 border border-zinc-900 p-6 md:p-8 rounded-sm relative overflow-hidden group">
+          <div className="bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-900 p-6 md:p-8 rounded-sm relative overflow-hidden group">
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-size-[30px_30px] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)]" />
 
             <form className="space-y-6 md:space-y-8 relative z-10">
               <div className="space-y-4">
-                <div className="flex justify-between items-center text-[9px] md:text-[10px] text-white/40 uppercase">
+                <div className="flex justify-between items-center text-[9px] md:text-[10px] text-zinc-600 dark:text-white/40 uppercase">
                   <span>Input_Field: 01</span>
                   <span>Type: String</span>
                 </div>
                 <input
                   type="text"
                   placeholder="[ ENTER_NAME ]"
-                  className="w-full bg-transparent border-b border-zinc-900 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder:text-white/60 text-sm"
+                  className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-900 py-3 text-black dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition-colors placeholder:text-zinc-600 dark:placeholder:text-white/60 text-sm"
                 />
               </div>
 
               <div className="space-y-4">
-                <div className="flex justify-between items-center text-[9px] md:text-[10px] text-white/40 uppercase">
+                <div className="flex justify-between items-center text-[9px] md:text-[10px] text-zinc-600 dark:text-white/40 uppercase">
                   <span>Input_Field: 02</span>
                   <span>Type: Email_Addr</span>
                 </div>
                 <input
                   type="email"
                   placeholder="[ ENTER_EMAIL ]"
-                  className="w-full bg-transparent border-b border-zinc-900 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder:text-white/60 text-sm"
+                  className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-900 py-3 text-black dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition-colors placeholder:text-zinc-600 dark:placeholder:text-white/60 text-sm"
                 />
               </div>
 
               <div className="space-y-4">
-                <div className="flex justify-between items-center text-[9px] md:text-[10px] text-white/40 uppercase">
+                <div className="flex justify-between items-center text-[9px] md:text-[10px] text-zinc-700 dark:text-white/40 uppercase">
                   <span>Input_Field: 03</span>
                   <span>Type: Text_Block</span>
                 </div>
                 <textarea
                   rows={4}
                   placeholder="[ COMPOSE_MESSAGE ]"
-                  className="w-full bg-transparent border-b border-zinc-900 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder:text-white/60 resize-none text-sm"
+                  className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-900 py-3 text-black dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition-colors placeholder:text-zinc-600 dark:placeholder:text-white/60 resize-none text-sm"
                 />
               </div>
 
-              <button className="group/btn w-full py-4 bg-blue-600 text-black font-bold uppercase tracking-widest text-[10px] md:text-xs flex items-center justify-center gap-3 hover:bg-white transition-all">
+              <button className="group/btn w-full py-4 bg-blue-600 dark:bg-blue-600 text-white dark:text-white font-bold uppercase tracking-widest text-[10px] md:text-xs flex items-center justify-center gap-3 hover:bg-blue-700 dark:hover:bg-blue-700 transition-all">
                 Execute_Send <Send className="w-3 h-3 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
               </button>
             </form>
@@ -119,7 +119,7 @@ export default function ContactSection() {
 
             {/* Email Copy Box */}
             <div className="space-y-4">
-              <h4 className="text-[10px] text-white/40 uppercase tracking-widest flex items-center gap-2 font-bold">
+              <h4 className="text-[10px] text-zinc-700 dark:text-white/40 uppercase tracking-widest flex items-center gap-2 font-bold">
                 <Terminal className="w-3 h-3" /> Quick_Connect
               </h4>
               <div
@@ -129,17 +129,17 @@ export default function ContactSection() {
                 onKeyDown={e => {
                   if (e.key === "Enter" || e.key === " ") copyToClipboard();
                 }}
-                className="group relative p-5 md:p-6 border border-zinc-900 bg-zinc-950/50 hover:border-blue-500/50 transition-all overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="group relative p-5 md:p-6 border border-zinc-300 dark:border-zinc-900 bg-white dark:bg-zinc-950/50 hover:border-blue-600 dark:hover:border-blue-500/50 transition-all overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                 aria-label="Copy email to clipboard"
               >
                 <div className="flex justify-between items-center gap-4">
                   <div className="space-y-1 min-w-0">
-                    <span className="text-[8px] md:text-[9px] text-zinc-800 block uppercase font-bold tracking-tighter">Primary_Node</span>
-                    <span className="text-lg sm:text-xl md:text-2xl text-white font-bold tracking-tight truncate block uppercase">
+                    <span className="text-[8px] md:text-[9px] text-zinc-600 dark:text-zinc-800 block uppercase font-bold tracking-tighter">Primary_Node</span>
+                    <span className="text-lg sm:text-xl md:text-2xl text-black dark:text-white font-bold tracking-tight truncate block uppercase">
                       {email}
                     </span>
                   </div>
-                  <div className="p-3 bg-zinc-900 group-hover:bg-blue-600 group-hover:text-black transition-colors flex-shrink-0">
+                  <div className="p-3 bg-zinc-200 dark:bg-zinc-900 group-hover:bg-blue-600 dark:group-hover:bg-blue-600 group-hover:text-white dark:group-hover:text-white transition-colors flex-shrink-0">
                     {copied ? <Check className="w-4 h-4 md:w-5 md:h-5" /> : <Copy className="w-4 h-4 md:w-5 md:h-5" />}
                   </div>
                 </div>
@@ -171,24 +171,24 @@ export default function ContactSection() {
             </div>
 
             {/* Availability Status */}
-            <div className="p-6 border border-zinc-900 space-y-4 bg-zinc-950/20">
-              <div className="flex items-center gap-2 text-green-500">
+            <div className="p-6 border border-zinc-300 dark:border-zinc-900 space-y-4 bg-zinc-100 dark:bg-zinc-950/20">
+              <div className="flex items-center gap-2 text-green-600 dark:text-green-500">
                 <ShieldCheck className="w-4 h-4" />
                 <span className="text-[10px] font-bold uppercase tracking-widest">Availability_Status</span>
               </div>
-              <p className="text-xs text-zinc-500 leading-relaxed font-medium">
-                Currently accepting requests for <span className="text-white">Full Stack Engineering</span> roles and <span className="text-white">AI Automation</span> consults. Current timezone: IST (UTC+5:30).
+              <p className="text-xs text-zinc-700 dark:text-zinc-500 leading-relaxed font-medium">
+                Currently accepting requests for <span className="text-black dark:text-white">Full Stack Engineering</span> roles and <span className="text-black dark:text-white">AI Automation</span> consults. Current timezone: IST (UTC+5:30).
               </p>
 
               {/* Responsive Social Links */}
-              <div className="flex flex-wrap gap-x-6 gap-y-3 pt-4 border-t border-zinc-900/50">
+              <div className="flex flex-wrap gap-x-6 gap-y-3 pt-4 border-t border-zinc-300 dark:border-zinc-900/50">
                 {SOCIALS_LINKS.map(social => (
                   <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[10px] text-white/40 hover:text-white transition-colors border-b border-transparent hover:border-white uppercase tracking-widest font-bold"
+                    className="text-[10px] text-zinc-700 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors border-b border-transparent hover:border-black dark:hover:border-white uppercase tracking-widest font-bold"
                   >
                     {social.name}
                   </a>
@@ -197,9 +197,9 @@ export default function ContactSection() {
             </div>
 
             {/* Hidden Footer Metadata - Mobile optimized */}
-            <div className="pt-8 border-t border-zinc-900 flex flex-wrap gap-x-8 gap-y-4 justify-between items-center opacity-30 group-hover:opacity-100 transition-opacity">
-              <p className="text-[8px] md:text-[9px] text-white/40uppercase tracking-widest">© 2025 M_SHARMA</p>
-              <div className="flex gap-4 md:gap-8 text-[8px] text-white/40 uppercase font-bold">
+            <div className="pt-8 border-t border-zinc-300 dark:border-zinc-900 flex flex-wrap gap-x-8 gap-y-4 justify-between items-center opacity-60 dark:opacity-30 group-hover:opacity-100 transition-opacity">
+              <p className="text-[8px] md:text-[9px] text-zinc-700 dark:text-white/40 uppercase tracking-widest">© 2025 M_SHARMA</p>
+              <div className="flex gap-4 md:gap-8 text-[8px] text-zinc-700 dark:text-white/40 uppercase font-bold">
                 <span>Latency: 24ms</span>
                 <span>Env: Prod</span>
               </div>

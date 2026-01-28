@@ -57,11 +57,11 @@ export default function CustomCursor() {
       >
         <div className="relative -translate-x-1/2 -translate-y-1/2">
           {/* Central Point */}
-          <div className={`w-1 h-1 bg-blue-500 rounded-full transition-transform duration-300 ${isHovering ? 'scale-0' : 'scale-100'}`} />
+          <div className={`w-1 h-1 bg-blue-600 dark:bg-blue-400 rounded-full transition-transform duration-300 ${isHovering ? 'scale-0' : 'scale-100'}`} />
           
           {/* Crosshair Lines */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-[1px] bg-blue-500/50" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-[1px] bg-blue-500/50" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-[1px] bg-blue-600/50 dark:bg-blue-400/50" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-[1px] bg-blue-600/50 dark:bg-blue-400/50" />
         </div>
       </motion.div>
 
@@ -80,22 +80,22 @@ export default function CustomCursor() {
             height: isHovering ? 40 : 20,
             rotate: isHovering ? 90 : 0
           }}
-          className="relative -translate-x-1/2 -translate-y-1/2 border border-blue-500/20"
+          className="relative -translate-x-1/2 -translate-y-1/2 border border-blue-600/20 dark:border-blue-400/20"
         >
           {/* Corner Brackets */}
-          <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-blue-500" />
-          <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-blue-500" />
+          <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-blue-600 dark:border-blue-400" />
+          <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-blue-600 dark:border-blue-400" />
         </motion.div>
 
         {/* HUD DATA LOG */}
         <div className="ml-8 -mt-2 space-y-0.5 font-mono">
             <div className="flex items-center gap-1.5">
-                <div className={`w-1 h-1 rounded-full ${isHovering ? 'bg-blue-500 animate-ping' : 'bg-zinc-800'}`} />
-                <span className={`text-[8px] font-bold tracking-tighter transition-colors ${isHovering ? 'text-blue-500' : 'text-zinc-600'}`}>
+                <div className={`w-1 h-1 rounded-full ${isHovering ? 'bg-blue-600 dark:bg-blue-400 animate-ping' : 'bg-zinc-400 dark:bg-zinc-700'}`} />
+                <span className={`text-[8px] font-bold tracking-tighter transition-colors ${isHovering ? 'text-blue-600 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-500'}`}>
                     {isHovering ? 'SYSTEM_ENGAGED' : 'SCANNING_NODE'}
                 </span>
             </div>
-            <div className="text-[6px] text-zinc-700 font-medium tabular-nums border-t border-zinc-900 pt-0.5">
+            <div className="text-[6px] text-zinc-700 dark:text-zinc-500 font-medium tabular-nums border-t border-zinc-300 dark:border-zinc-800 pt-0.5">
                 POS_{coords.x.toString().padStart(4, '0')} // {coords.y.toString().padStart(4, '0')}
             </div>
         </div>

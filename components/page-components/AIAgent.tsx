@@ -150,7 +150,7 @@ useEffect(() => {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-[100] p-3 cursor-pointer bg-blue-500 text-black rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] hover:scale-105 active:scale-95 transition-all md:animate-none 
+        className={`fixed bottom-6 right-6 z-[100] p-3 cursor-pointer bg-blue-600 dark:bg-blue-500 text-white dark:text-white rounded-full shadow-[0_0_15px_rgba(37,99,235,0.5)] dark:shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:scale-105 active:scale-95 transition-all md:animate-none 
           ${!isOpen ? 'animate-bounce' : 'animate-none'} `}
       >
         {isOpen
@@ -165,27 +165,27 @@ useEffect(() => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0.5, y: 30, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-20 right-6 z-[100] w-[calc(100vw-3rem)] sm:w-[420px] h-[600px] bg-black/80 border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden font-mono backdrop-blur-2xl"
+            className="fixed bottom-20 right-6 z-[100] w-[calc(100vw-3rem)] sm:w-[420px] h-[600px] bg-white dark:bg-black/80 border border-zinc-300 dark:border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden font-mono backdrop-blur-2xl"
           >
             {/* NEW HEADER DESIGN */}
-            <div className="p-4 border-b border-white/5 bg-white/5 flex justify-between items-center">
+            <div className="p-4 border-b border-zinc-300 dark:border-white/5 bg-white dark:bg-white/5 flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <Bot className="w-4 h-4 text-blue-500" />
+                <div className="p-2 bg-blue-100 dark:bg-blue-500/10 rounded-lg">
+                  <Bot className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="text-[10px] text-white font-bold tracking-[0.1em]">PROXY_V3_CORE</h4>
-                  <p className="text-[8px] text-green-500/70 font-medium">● SYSTEM_READY</p>
+                  <h4 className="text-[10px] text-black dark:text-white font-bold tracking-[0.1em]">PROXY_V3_CORE</h4>
+                  <p className="text-[8px] text-green-600 dark:text-green-500/70 font-medium">● SYSTEM_READY</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 {messages.length > 0 && (
-                  <button onClick={clearHistory} className="p-2 hover:bg-red-500/10 rounded-lg group transition-colors" title="Clear History">
-                    <Trash2 className="w-3.5 h-3.5 text-zinc-500 group-hover:text-red-500" />
+                  <button onClick={clearHistory} className="p-2 hover:bg-red-100 dark:hover:bg-red-500/10 rounded-lg group transition-colors" title="Clear History">
+                    <Trash2 className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500" />
                   </button>
                 )}
-                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/5 rounded-lg transition-colors">
-                  <X className="w-4 h-4 text-zinc-500 cursor-pointer" />
+                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-gray-200 dark:hover:bg-white/5 rounded-lg transition-colors">
+                  <X className="w-4 h-4 text-zinc-600 dark:text-zinc-500 cursor-pointer" />
                 </button>
               </div>
             </div>
@@ -194,20 +194,20 @@ useEffect(() => {
             <div ref={scrollRef} className="flex-1 p-3 md:p-5 overflow-y-auto space-y-6 no-scrollbar">
               {messages.length === 0 && !isLoading && (
                 <div className="space-y-6 mt-4">
-                  <div className="p-4 rounded-xl border border-blue-500/20 bg-blue-500/5">
-                    <p className="text-[11px] text-blue-200 leading-relaxed">
+                  <div className="p-4 rounded-xl border border-blue-300 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/5">
+                    <p className="text-[11px] text-blue-900 dark:text-blue-200 leading-relaxed">
                       Welcome. I am Manish&apos;s digital proxy. Accessing his project archives and technical history...
                     </p>
                   </div>
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-[9px] text-zinc-500 uppercase font-bold tracking-widest">
+                    <div className="flex items-center gap-2 text-[9px] text-zinc-600 dark:text-zinc-500 uppercase font-bold tracking-widest">
                       <History className="w-3 h-3" /> Preferred Commands
                     </div>
                     {PREMADE_QUESTIONS.map((item, idx) => (
                       <button
                         key={idx}
                         onClick={() => handleSend(undefined, item.query)}
-                        className="w-fit cursor-pointer mr-1 text-left p-2 text-[10px] bg-white/5 hover:bg-blue-600/10 border border-white/5 hover:border-blue-500/30 rounded-xl text-zinc-400 hover:text-blue-400 transition-all  "
+                        className="w-fit cursor-pointer mr-1 text-left p-2 text-[10px] bg-gray-100 dark:bg-white/5 hover:bg-blue-100 dark:hover:bg-blue-600/10 border border-zinc-300 dark:border-white/5 hover:border-blue-300 dark:hover:border-blue-500/30 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-blue-700 dark:hover:text-blue-400 transition-all  "
                       >
                         {item.label}
                       </button>
@@ -219,29 +219,29 @@ useEffect(() => {
               {messages.map((m, i) => (
                 <div key={i} className={`flex relative mb-4 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[100%] md:max-w-[95%] p-4 text-[11px] leading-relaxed group relative transition-all ${m.role === 'user'
-                    ? 'bg-blue-600 text-black font-bold rounded-2xl rounded-tr-none'
-                    : 'bg-white/5 text-zinc-200 border border-white/10 rounded-2xl rounded-tl-none'
+                    ? 'bg-blue-600 dark:bg-blue-600 text-white dark:text-white font-bold rounded-2xl rounded-tr-none'
+                    : 'bg-gray-100 dark:bg-white/5 text-zinc-800 dark:text-zinc-200 border border-zinc-300 dark:border-white/10 rounded-2xl rounded-tl-none'
                     }`}>
                     {m.role === 'assistant' ? (
                       <div className="prose prose-invert prose-xs break-words overflow-x-scroll pr-">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            a: (props) => <a {...props} target="_blank" className="text-blue-400 underline" />,
+                            a: (props) => <a {...props} target="_blank" className="text-blue-600 dark:text-blue-400 underline" />,
                             ul: (props) => <ul {...props} className="list-disc ml-3 mt-2" />,
-                            strong: (props) => <span {...props} className="text-white font-black" />,
+                            strong: (props) => <span {...props} className="text-black dark:text-white font-black" />,
                             // Table styling
                             table: (props) => (
                               <div className="overflow-x-auto my-3">
-                                <table {...props} className="border-collapse border border-white/20 w-screen max-w-lg md:w-auto" />
+                                <table {...props} className="border-collapse border border-zinc-300 dark:border-white/20 w-screen max-w-lg md:w-auto" />
                               </div>
                             ),
-                            thead: (props) => <thead {...props} className="bg-white/10" />,
+                            thead: (props) => <thead {...props} className="bg-gray-100 dark:bg-white/10" />,
                             th: (props) => (
-                              <th {...props} className="border border-white/20 p-1 text-left font-bold" />
+                              <th {...props} className="border border-zinc-300 dark:border-white/20 p-1 text-left font-bold text-black dark:text-white" />
                             ),
                             td: (props) => (
-                              <td {...props} className="border border-white/20 p-1" />
+                              <td {...props} className="border border-zinc-300 dark:border-white/20 p-1 text-black dark:text-white" />
                             ),
                           }}
                         >
@@ -259,23 +259,23 @@ useEffect(() => {
               ))}
 
               {isLoading && (
-                <div className="flex items-center gap-2 text-[10px] text-blue-500 font-bold uppercase animate-pulse">
+                <div className="flex items-center gap-2 text-[10px] text-blue-600 dark:text-blue-500 font-bold uppercase animate-pulse">
                   <Terminal className="w-3 h-3" /> fetching_packets...
                 </div>
               )}
             </div>
 
             {/* INPUT */}
-            <form onSubmit={handleSend} className="p-4 bg-white/5 border-t border-white/5">
-              <div className="flex items-center gap-3 bg-black/40 border border-white/10 px-4 py-3 rounded-2xl focus-within:border-blue-500/50 transition-all">
+            <form onSubmit={handleSend} className="p-4 bg-white dark:bg-white/5 border-t border-zinc-300 dark:border-white/5">
+              <div className="flex items-center gap-3 bg-gray-100 dark:bg-black/40 border border-zinc-300 dark:border-white/10 px-4 py-3 rounded-2xl focus-within:border-blue-400 dark:focus-within:border-blue-500/50 transition-all">
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Execute query..."
-                  className="flex-1 bg-transparent text-[11px] text-white outline-none placeholder:text-zinc-600"
+                  className="flex-1 bg-transparent text-[11px] text-black dark:text-white outline-none placeholder:text-zinc-600 dark:placeholder:text-zinc-600"
                 />
                 <button type="submit" disabled={isLoading}>
-                  <Send className={`w-4 h-4 cursor-pointer ${isLoading ? 'text-zinc-800' : 'text-blue-500'}`} />
+                  <Send className={`w-4 h-4 cursor-pointer ${isLoading ? 'text-zinc-400 dark:text-zinc-800' : 'text-blue-600 dark:text-blue-500'}`} />
                 </button>
               </div>
             </form>

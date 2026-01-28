@@ -9,7 +9,7 @@ import SectionHeader from '../SectionHeader';
 const TimelineSection = () => {
     return (
         <section id="timeline" className="mb-32 font-sans">
-            <div className="pt-20 border-t border-white/10">
+            <div className="pt-20 border-t border-zinc-300 dark:border-white/10">
                 {/* Section Header */}
                 <SectionHeader
           number="05"
@@ -46,7 +46,7 @@ const TimelineSection = () => {
                             className="relative grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4">
                             {/* Date Column */}
                             <div className="md:col-span-3">
-                                <span className="text-zinc-600 font-mono text-[11px] tracking-tighter">
+                                <span className="text-zinc-700 dark:text-zinc-600 font-mono text-[11px] tracking-tighter">
                                     {
                                     item.period
                                 } </span>
@@ -55,21 +55,21 @@ const TimelineSection = () => {
                             {/* Content Column */}
                             <div className="md:col-span-9 relative pl-8 md:pl-0">
                                 {/* Vertical Decorative Line for Mobile */}
-                                <div className="absolute left-0 top-0 w-px h-full bg-zinc-800 md:hidden"/>
+                                <div className="absolute left-0 top-0 w-px h-full bg-zinc-400 dark:bg-zinc-800 md:hidden"/>
 
                                 <div className="space-y-4">
                                     <div className="space-y-1">
-                                        <h4 className="text-xl font-bold text-white tracking-tight">
+                                        <h4 className="text-xl font-bold text-black dark:text-white tracking-tight">
                                             {
                                             item.title
                                         } </h4>
-                                        <p className="text-blue-400/80 text-sm font-medium">
+                                        <p className="text-blue-600 dark:text-blue-400/80 text-sm font-medium">
                                             {
                                             item.company
                                         } </p>
                                     </div>
 
-                                    <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl">
+                                    <p className="text-zinc-700 dark:text-zinc-400 text-sm leading-relaxed max-w-2xl">
                                         {
                                         item.description
                                     } </p>
@@ -79,8 +79,8 @@ const TimelineSection = () => {
                                         item.details.map((detail, i) => (
                                             <div key={i}
                                                 className="flex gap-3 items-start">
-                                                <span className="text-blue-500 font-bold text-xs mt-1">↳</span>
-                                                <p className="text-xs text-zinc-500 leading-relaxed italic">
+                                                <span className="text-blue-600 dark:text-blue-500 font-bold text-xs mt-1">↳</span>
+                                                <p className="text-xs text-zinc-700 dark:text-zinc-500 leading-relaxed italic">
                                                     {detail} </p>
                                             </div>
                                         ))

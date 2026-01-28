@@ -15,7 +15,7 @@ export default function AboutSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
-      className="mb-32 pt-20 border-t border-white/5 font-mono selection:bg-blue-500/30"
+      className="mb-32 pt-20 border-t border-zinc-300 dark:border-white/5 font-mono selection:bg-blue-500/30"
     >
       <SectionHeader
         number="01"
@@ -36,9 +36,9 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-5 space-y-8 lg:mx-0 mx-auto"
           >
-            <div className="relative group p-1 bg-zinc-900/50 rounded-sm inline-block  ">
-              <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
-              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-zinc-700 group-hover:border-blue-500/50 transition-colors" />
+            <div className="relative group p-1 bg-gray-100 dark:bg-zinc-900/50 rounded-sm inline-block  ">
+              <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-zinc-400 dark:border-zinc-700 group-hover:border-blue-600 dark:group-hover:border-blue-500/50 transition-colors" />
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-zinc-400 dark:border-zinc-700 group-hover:border-blue-600 dark:group-hover:border-blue-500/50 transition-colors" />
 
               <div className="relative  w-64 h-80  grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700 ease-in-out">
                 <Image
@@ -89,44 +89,44 @@ export default function AboutSection() {
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
                 <span className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50" />
-                <span className="ml-2 text-zinc-700 text-[10px] tracking-[0.3em] uppercase font-bold">
+                <span className="ml-2 text-zinc-600 dark:text-zinc-700 text-[10px] tracking-[0.3em] uppercase font-bold">
                   runtime.log
                 </span>
               </div>
 
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white leading-[0.9]">
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-black dark:text-white leading-[0.9]">
                 Writing software <br />
-                that people can <span className="text-zinc-600 italic">rely on</span>.
+                that people can <span className="text-zinc-500 dark:text-zinc-600 italic">rely on</span>.
               </h2>
             </div>
 
-            <div className="space-y-8 border-l border-zinc-900 pl-8 py-2 relative">
-              <div className="absolute left-0 top-0 w-1 h-1 bg-blue-500 -translate-x-1/2" />
+            <div className="space-y-8 border-l border-zinc-400 dark:border-zinc-900 pl-8 py-2 relative">
+              <div className="absolute left-0 top-0 w-1 h-1 bg-blue-600 dark:bg-blue-500 -translate-x-1/2" />
 
-              <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
+              <p className="text-zinc-700 dark:text-zinc-400 text-lg leading-relaxed max-w-xl">
                 I care about building systems that feel calm under pressure.
                 My work is driven by the belief that good software should be easy
                 to reason about, easy to extend, and difficult to break.
                 From internships at{" "}
-                <span className="text-zinc-300">Karmadude IT Solutions</span> to
+                <span className="text-zinc-600 dark:text-zinc-300">Karmadude IT Solutions</span> to
                 independent AI experiments, I focus on clarity before cleverness.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div className="space-y-3">
-                  <h4 className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                    <span className="text-blue-600">01</span> // CLARITY
+                  <h4 className="text-black dark:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span className="text-blue-600 dark:text-blue-600">01</span> // CLARITY
                   </h4>
-                  <p className="text-zinc-600 text-[11px] leading-relaxed">
+                  <p className="text-zinc-700 dark:text-zinc-600 text-[11px] leading-relaxed">
                     Writing code that reads like intent, not instructions—so future
                     developers (including myself) can understand it instantly.
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <h4 className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                    <span className="text-blue-600">02</span> // RELIABILITY
+                  <h4 className="text-black dark:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span className="text-blue-600 dark:text-blue-600">02</span> // RELIABILITY
                   </h4>
-                  <p className="text-zinc-600 text-[11px] leading-relaxed">
+                  <p className="text-zinc-700 dark:text-zinc-600 text-[11px] leading-relaxed">
                     Designing systems that behave predictably in real-world
                     conditions, not just ideal ones.
                   </p>
@@ -134,18 +134,18 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="pt-12 flex flex-wrap gap-x-12 gap-y-4 border-t border-zinc-900">
+            <div className="pt-12 flex flex-wrap gap-x-12 gap-y-4 border-t border-zinc-300 dark:border-zinc-900">
               <div>
-                <p className="text-[9px] uppercase text-zinc-700 mb-1">Mode</p>
-                <p className="text-[11px] text-zinc-500">Learning & Building</p>
+                <p className="text-[9px] uppercase text-zinc-700 dark:text-zinc-700 mb-1">Mode</p>
+                <p className="text-[11px] text-zinc-700 dark:text-zinc-500">Learning & Building</p>
               </div>
               <div>
-                <p className="text-[9px] uppercase text-zinc-700 mb-1">Focus</p>
-                <p className="text-[11px] text-zinc-500">Quality over shortcuts</p>
+                <p className="text-[9px] uppercase text-zinc-700 dark:text-zinc-700 mb-1">Focus</p>
+                <p className="text-[11px] text-zinc-700 dark:text-zinc-500">Quality over shortcuts</p>
               </div>
               <div>
-                <p className="text-[9px] uppercase text-zinc-700 mb-1">Last Sync</p>
-                <p className="text-[11px] text-zinc-500">Dec 2025</p>
+                <p className="text-[9px] uppercase text-zinc-700 dark:text-zinc-700 mb-1">Last Sync</p>
+                <p className="text-[11px] text-zinc-700 dark:text-zinc-500">Dec 2025</p>
               </div>
             </div>
 

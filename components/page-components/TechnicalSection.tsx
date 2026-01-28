@@ -25,20 +25,20 @@ const SkillCard = ({ icon: Icon, name, index, href }: { icon: any, name: string,
       ease: "easeOut" 
     }}
     whileHover={{ x: 5, backgroundColor: "rgba(30, 58, 138, 0.15)", borderColor: "rgba(59, 130, 246, 0.5)" }}
-    className="group relative flex cursor-pointer items-center gap-4 p-3 border border-zinc-900 bg-zinc-950/50 transition-all duration-200 cursor-alias block"
+    className="group relative flex cursor-pointer items-center gap-4 p-3 border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 transition-all duration-200 cursor-alias block hover:bg-blue-50 dark:hover:bg-zinc-900/70"
   >
-    <div className="text-xl text-zinc-600 group-hover:text-blue-500 transition-colors">
+    <div className="text-xl text-zinc-600 dark:text-zinc-600 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
       <Icon />
     </div>
     <div className="flex flex-col">
-      <span className="text-[10px] font-bold text-zinc-400 group-hover:text-white uppercase tracking-wider">
+      <span className="text-[10px] font-bold text-zinc-700 dark:text-zinc-500 group-hover:text-blue-600 dark:group-hover:text-white uppercase tracking-wider">
         {name}
       </span>
       {/* <span className="text-[8px] text-zinc-800 uppercase tracking-tighter font-mono group-hover:text-zinc-600">
         view_docs.ptr
       </span> */}
     </div>
-    <div className="absolute top-0 right-0 w-1 h-1 bg-zinc-800 group-hover:bg-blue-500 transition-colors" />
+    <div className="absolute top-0 right-0 w-1 h-1 bg-zinc-300 dark:bg-zinc-800 group-hover:bg-blue-600 dark:group-hover:bg-blue-400 transition-colors" />
   </motion.a>
 );
 
@@ -77,7 +77,7 @@ export default function TechnicalSection() {
       viewport={{ once: true, margin: "-100px" }}
       className="mb-32 font-mono"
     >
-      <div className="pt-12 border-t border-white/5">
+      <div className="pt-12 border-t border-zinc-300 dark:border-white/5">
         
         {/* Header Logic */}
         <div className="flex justify-between items-start mb-16">
@@ -89,8 +89,8 @@ export default function TechnicalSection() {
           />
           
           <div className="text-right font-mono hidden sm:block">
-            <div className="text-[9px] text-blue-900 uppercase animate-pulse">Scanning System Modules...</div>
-            <div className="text-[9px] text-zinc-800 uppercase tracking-widest leading-none">Status: 0 errors / 0 warnings</div>
+            <div className="text-[9px] text-blue-900 dark:text-blue-900 uppercase animate-pulse">Scanning System Modules...</div>
+            <div className="text-[9px] text-zinc-700 dark:text-zinc-700 uppercase tracking-widest leading-none">Status: 0 errors / 0 warnings</div>
           </div>
         </div>
 
@@ -105,15 +105,15 @@ export default function TechnicalSection() {
               className="space-y-6"
             >
               <div className="flex items-center gap-3">
-                <span className="text-blue-900 text-[10px] font-bold">0{catIndex + 1}</span>
-                <span className="text-zinc-600 text-[10px] uppercase tracking-[0.2em] font-bold">
+                <span className="text-blue-900 dark:text-blue-900 text-[10px] font-bold">0{catIndex + 1}</span>
+                <span className="text-zinc-600 dark:text-zinc-600 text-[10px] uppercase tracking-[0.2em] font-bold">
                   {category}_Layer
                 </span>
                 <motion.div 
                    initial={{ width: 0 }}
                    whileInView={{ width: "100%" }}
                    transition={{ duration: 0.8, delay: 0.5 }}
-                   className="h-px bg-zinc-900" 
+                   className="h-px bg-zinc-300 dark:bg-zinc-800" 
                 />
               </div>
 

@@ -1,33 +1,31 @@
 "use client"
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import { Contrast } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 
 export function ModeToggle() {
+  const [mounted, setMounted] = React.useState(false)
   const { theme, resolvedTheme, setTheme } = useTheme()
 
-  // Use the resolved theme so "system" follows the actual current mode
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const currentTheme = (theme === "system" ? resolvedTheme : theme) ?? "light"
   const nextTheme = currentTheme === "dark" ? "light" : "dark"
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
+      className="cursor-pointer"
       onClick={() => setTheme(nextTheme)}
       aria-label="Toggle theme"
     >
-      <Sun
-        className={`h-[1.2rem] w-[1.2rem] transition-all ${
-          currentTheme === "dark" ? "scale-0" : "scale-100"
-        }`}
-      />
-      <Moon
-        className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${
-          currentTheme === "dark" ? "scale-100" : "scale-0"
-        }`}
-      />
+      {mounted && (
+        <Contrast className="h-[1.2rem] w-[1.2rem] transition-all" />
+      )}
       <span className="sr-only">Toggle theme</span>
     </Button>
   )

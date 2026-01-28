@@ -38,7 +38,7 @@ export default function ProjectsPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen bg-[#050505] text-zinc-400 font-mono pt-32 pb-20 px-3"
+      className="min-h-screen bg-white dark:bg-[#050505] text-zinc-600 dark:text-zinc-400 font-mono pt-32 pb-20 px-3"
     >
       <div className="max-w-4xl mx-auto space-y-16">
         
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
                Registry_v3.0 // Production_Assets
              </span>
           </div>
-          <h1 className="text-3xl md:text-6xl font-black text-white tracking-tighter uppercase mb-6 leading-none">
+          <h1 className="text-3xl md:text-6xl font-black text-black dark:text-white tracking-tighter uppercase mb-6 leading-none">
             Technical_Output
           </h1>
           <div className="text-[10px] text-zinc-600 space-y-1 uppercase font-bold">

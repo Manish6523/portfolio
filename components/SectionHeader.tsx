@@ -26,10 +26,10 @@ export default function SectionHeader({
       transition={{ duration: 0.6 }}
       className={`space-y-1 pt-12 ${className}`}
     >
-      <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600">
+      <h2 className="text-[10px] uppercase tracking-[0.4em] text-zinc-600 dark:text-zinc-600">
         {number} // {label}
       </h2>
-      <h3 className={`text-2xl font-bold text-white tracking-tighter ${titleClassName}`}>
+      <h3 className={`text-2xl font-bold text-black dark:text-white tracking-tighter ${titleClassName}`}>
         {title}
       </h3>
     </motion.div>

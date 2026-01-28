@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes';
 import React, { useRef, useEffect, useCallback } from 'react';
 
 interface ClickSparkProps {
@@ -19,7 +20,6 @@ interface Spark {
 }
 
 const ClickSpark: React.FC<ClickSparkProps> = ({
-  sparkColor = '#fff',
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 8,
@@ -28,6 +28,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   extraScale = 1.0,
   children
 }) => {
+  const [sparkColor, setSparkColor] = React.useState('#155dfc');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
   const startTimeRef = useRef<number | null>(null);
@@ -152,7 +153,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 
   return (
     <div className="relative w-full h-full" onClick={handleClick}>
-      <canvas ref={canvasRef} className="absolute z-[500] inset-0 pointer-events-none" />
+      <canvas ref={canvasRef} className="absolute z-500 inset-0 pointer-events-none" />
       {children}
     </div>
   );
