@@ -18,7 +18,7 @@ export interface Project {
   overview: string; // High-level "The What"
   problemStatement: string; // "The Why"
   solutionApproach: string; // "The How"
-  status: "Active" | "Production" | "Internship" | "Experiment";
+  status: string; // e.g., "Active", "Completed", "Internship"
   tech: ProjectTech;
   images: string[]; // Array for long-scroll galleries
   github: string;
@@ -42,6 +42,78 @@ export interface NavLink {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    id: "stratos",
+    title: "Stratos",
+    client: "Self Project",
+    role: "Lead Full-Stack Developer",
+    year: "2026",
+    status: "Active (Beta)",
+    description:
+      "A high-performance, multi-tenant SaaS platform designed for digital agencies to manage clients, projects, and marketing automation.",
+    overview:
+      "Stratos provides a complete 'Agency OS' with white-labeling capabilities, client subaccount isolation, a Kanban-based CRM, and a sophisticated visual funnel builder with integrated AI assistance.",
+    problemStatement:
+      "Digital agencies often struggle with fragmented tools for CRM, client management, and website building, leading to inefficient workflows and a lack of professional brand consistency for their clients.",
+    solutionApproach:
+      "Engineered a multi-tenant architecture using Next.js 15 and Prisma. Developed a custom visual editor with a recursive rendering engine and a complex state machine for undo/redo logic. Integrated Gemini AI for automated layout drafting and Razorpay for a localized INR payment ecosystem.",
+    tech: {
+      frontend: [
+        "Next.js 15",
+        "Tailwind CSS 4",
+        "Shadcn/UI",
+        "Tremor Charts",
+        "React Beautiful DnD",
+      ],
+      backend: [
+        "Prisma ORM",
+        "TiDB Cloud (MySQL)",
+        "Clerk Auth",
+        "UploadThing",
+      ],
+      tools: ["Gemini AI API", "Razorpay SDK", "TanStack Table", "Zod"],
+    },
+    images: [
+      "/projects/stratos/hero.png",
+      "/projects/stratos/dashboard.png",
+      "/projects/stratos/subaccount.png",
+      "/projects/stratos/billing.png",
+      "/projects/stratos/subaccount-contact.png",
+      "/projects/stratos/agency-teams.png",
+      "/projects/stratos/media-bucket.png",
+      "/projects/stratos/funnel-steps-creation-page.png",
+      "/projects/stratos/funnelbuilder.png"
+    ],
+    github: "https://github.com/Manish6523/stratos---Agency-Website-Builder", // Inferred from template
+    link: "https://stratospro.me", // Placeholder for live URL
+    features: [
+      {
+        title: "Multi-Tenant Architecture",
+        detail:
+          "Robust isolation of agency data with secure subaccount management and role-based access control (RBAC).",
+      },
+      {
+        title: "Visual Page Builder",
+        detail:
+          "A drag-and-drop canvas featuring a recursive rendering engine, global state management, and device-responsive previews.",
+      },
+      {
+        title: "AI-Powered Generation",
+        detail:
+          "Integrated Gemini AI to generate structured page layouts and context-aware marketing copy directly on the canvas.",
+      },
+      {
+        title: "Localized Payment System",
+        detail:
+          "Full Razorpay integration supporting INR subscriptions, automated webhooks, and live payment history tracking.",
+      },
+    ],
+    outcomes: [
+      "Built a scalable SaaS infrastructure supporting 7 unique visual themes with flash-free restoration.",
+      "Developed a comprehensive Kanban CRM system with real-time financial tracking and ticket management.",
+      "Implemented an automated 'Launchpad' onboarding system to streamline subaccount setup by 70%.",
+    ],
+  },
   {
     id: "quizard",
     title: "Quizard",
@@ -187,7 +259,6 @@ export const TIMELINE: TimelineEntry[] = [
     ],
   },
 ];
-
 
 export const NAV_LINKS: NavLink[] = [
   {
