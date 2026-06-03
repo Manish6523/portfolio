@@ -122,7 +122,7 @@ export default function HeroSection() {
                         width="15"
                         alt={displayIdeName}
                       />
-                      <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                      <span className="text-blue-600 hidden sm:block dark:text-blue-400 font-semibold">
                         [{displayIdeName}]
                       </span>
                     </span>
@@ -206,7 +206,7 @@ export default function HeroSection() {
             </p>
 
             {/* 4. Actions: Brutalist Buttons */}
-            <div className="flex flex-wrap gap-6 pt-4">
+            <div className="flex flex-wrap gap-6 sm:pt-4">
               <Link
                 href="/project"
                 className="group flex items-center gap-2 text-xs font-bold text-black dark:text-white uppercase tracking-widest"
@@ -224,7 +224,7 @@ export default function HeroSection() {
                 <Download className="w-4 h-4 text-green-600 dark:text-green-400 transition-transform group-hover:-translate-y-1"/>
               </a>
 
-              <div className="flex items-center gap-4 sm:border-l border-zinc-400 dark:border-zinc-700 sm:pl-6">
+              <div className="flex items-center gap-4 border-l border-zinc-400 dark:border-zinc-700 pl-6">
                 {[
                   {
                     icon: Github,
