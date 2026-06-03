@@ -115,11 +115,76 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: "keyra",
+    title: "Keyra",
+    client: "Self Project",
+    role: "Lead Full-Stack Developer",
+    year: "2026",
+    status: "Active",
+    description:
+      "A zero-knowledge, client-side encrypted vault for developers to securely store and organize their API keys.",
+    overview:
+      "Keyra provides developers with a secure, beautifully animated vault for their API keys. Everything is encrypted locally in the browser using AES-256-GCM, meaning the servers never see the plaintext keys or the master password.",
+    problemStatement:
+      "Developers often store sensitive API keys in plain text, fragmented across local files, or rely on cloud providers where they have to trust the provider's server-side encryption and security practices.",
+    solutionApproach:
+      "Engineered a client-side encryption pipeline using the Web Crypto API, PBKDF2 for key derivation, and AES-256-GCM for encryption. Built a premium animated UI with Next.js, Tailwind CSS, GSAP, and Framer Motion. Implemented team sharing using RSA-OAEP public key infrastructure (PKI) backed by Supabase.",
+    tech: {
+      frontend: [
+        "Next.js 14",
+        "Tailwind CSS",
+        "GSAP",
+        "Framer Motion",
+        "Zustand",
+      ],
+      backend: ["Supabase Auth", "PostgreSQL"],
+      tools: ["Web Crypto API", "Radix UI", "Lucide React"],
+    },
+    images: [
+      "/projects/keyra/hero.png",
+      "/projects/keyra/dashboard.png",
+      "/projects/keyra/sandbox.png",
+      "/projects/keyra/projects.png",
+      "/projects/keyra/team-management.png",
+      "/projects/keyra/settings.png",
+      "/projects/keyra/import-page.png",
+    ],
+    github: "https://github.com/Manish6523/Keyra",
+    link: "https://keyraa.netlify.app", // Feel free to update the live link if it's different
+    features: [
+      {
+        title: "Zero-Knowledge Encryption",
+        detail:
+          "API keys are encrypted in the browser using AES-256-GCM before ever leaving the device.",
+      },
+      {
+        title: "Team Vault Sharing (PKI)",
+        detail:
+          "Securely share vaults with team members using RSA public key cryptography for key exchange.",
+      },
+      {
+        title: "Auto-Detect Service",
+        detail:
+          "Automatically detects the service provider (e.g., OpenAI, Stripe, AWS) when pasting a key, using prefix matching.",
+      },
+      {
+        title: "Interactive Crypto Sandbox",
+        detail:
+          "A visual, animated sandbox demonstrating the exact PBKDF2 and AES-GCM encryption pipeline happening in real-time.",
+      },
+    ],
+    outcomes: [
+      "Successfully implemented a complex client-side encryption and PKI sharing architecture natively in the browser.",
+      "Delivered a premium user experience combining GSAP scroll animations, Aurora backgrounds, and Framer Motion.",
+      "Ensured absolute data privacy where even the database administrators cannot read the stored API keys.",
+    ],
+  },
+  {
     id: "quizard",
     title: "Quizard",
     client: "Self Project",
     role: "Lead Developer",
-    year: "2024",
+    year: "2025",
     status: "Active",
     description:
       "An AI-driven assessment platform that transforms unstructured content into structured, high-quality quizzes.",

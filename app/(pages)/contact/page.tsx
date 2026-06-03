@@ -21,10 +21,26 @@ const itemVariants = {
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'transmitted'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
-    setTimeout(() => setStatus('transmitted'), 2000);
+    
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+    
+    const subject = encodeURIComponent(`New Contact Form Submission from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    
+    window.location.href = `mailto:ms5392363@gmail.com?subject=${subject}&body=${body}`;
+
+    setTimeout(() => {
+      setStatus('transmitted');
+      (e.target as HTMLFormElement).reset();
+    }, 1000);
+    
+    setTimeout(() => setStatus('idle'), 4000);
   };
 
   return (
@@ -64,6 +80,7 @@ export default function ContactPage() {
                     <label className="text-[9px] font-black text-zinc-600 dark:text-zinc-700 uppercase tracking-widest">Sender_Identity</label>
                     <input 
                       required
+                      name="name"
                       type="text" 
                       placeholder="NAME_OR_ORG"
                       className="w-full bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-900 px-4 py-3 text-sm text-black dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-600 transition-colors placeholder:text-zinc-400 dark:placeholder:text-zinc-800"
@@ -73,6 +90,7 @@ export default function ContactPage() {
                     <label className="text-[9px] font-black text-zinc-600 dark:text-zinc-700 uppercase tracking-widest">Return_Address</label>
                     <input 
                       required
+                      name="email"
                       type="email" 
                       placeholder="EMAIL@DOMAIN.COM"
                       className="w-full bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-900 px-4 py-3 text-sm text-black dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-600 transition-colors placeholder:text-zinc-400 dark:placeholder:text-zinc-800"
@@ -84,6 +102,7 @@ export default function ContactPage() {
                   <label className="text-[9px] font-black text-zinc-600 dark:text-zinc-700 uppercase tracking-widest">Data_Payload</label>
                   <textarea 
                     required
+                    name="message"
                     rows={4}
                     placeholder="ENTER_MESSAGE_BODY..."
                     className="w-full bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-900 px-4 py-3 text-sm text-black dark:text-white focus:outline-none focus:border-blue-600 dark:focus:border-blue-600 transition-colors resize-none placeholder:text-zinc-400 dark:placeholder:text-zinc-800"

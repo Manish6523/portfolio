@@ -35,8 +35,8 @@ export default function GithubSection() {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className="pt-12 md:px-0 px-3 mb-12 font-mono"
     >
       {/* The "Leaky" Container */}

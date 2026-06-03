@@ -149,7 +149,7 @@ export default function AboutManifest() {
               
               {/* PORTRAIT BLOCK */}
               <div className="border border-zinc-300 dark:border-zinc-900 p-2 bg-gray-100 dark:bg-zinc-950 shadow-2xl shadow-blue-600/5 dark:shadow-blue-500/5">
-                <div className="relative aspect-4/5 overflow-hidden grayscale contrast-[1.1] brightness-90 hover:grayscale-0 transition-all duration-700">
+                <div className="relative aspect-4/5 overflow-hidden grayscale-0 contrast-[1.1] brightness-90 hover:grayscale-0 transition-all duration-700">
                   <Image 
                     src="/me02.png" 
                     alt="Manish Sharma" 

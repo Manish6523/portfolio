@@ -9,13 +9,25 @@ export function useCursorActivity() {
   // Don't call hook with undefined
   const data = DISCORD_ID ? useLanyardWS(DISCORD_ID) : undefined;
 
-  // Filter for Cursor or VS Code activity
-  const cursorActivity = data?.activities?.find(
-    (a) => a.name === "Cursor" || a.name === "Visual Studio Code"
-  );
+  const activities = data?.activities || [];
+  
+  const isAntigravity = (a: any) => 
+    a.name === "Antigravity" || 
+    a.assets?.small_text?.includes("Antigravity") || 
+    a.assets?.large_text?.includes("Antigravity");
+
+  const cursorActivity = activities.find(isAntigravity)
+                      || activities.find((a) => a.name === "Cursor")
+                      || activities.find((a) => a.name === "Visual Studio Code");
+
+  let trueName = cursorActivity?.name || null;
+  if (cursorActivity && isAntigravity(cursorActivity)) {
+    trueName = "Antigravity";
+  }
 
   return { 
     isCoding: !!cursorActivity,
+    name: trueName,
     details: cursorActivity?.details || null,
     state: cursorActivity?.state || null,
     start: cursorActivity?.timestamps?.start || null,
