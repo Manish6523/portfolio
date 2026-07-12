@@ -29,10 +29,12 @@ export interface Project {
 }
 
 export interface TimelineEntry {
+  image: string;
   period: string;
   title: string;
   company: string;
-  description: string; // New field for high-level context
+  tag: string;
+  description: string; 
   details: string[];
 }
 
@@ -82,7 +84,7 @@ export const PROJECTS: Project[] = [
       "/projects/stratos/agency-teams.png",
       "/projects/stratos/media-bucket.png",
       "/projects/stratos/funnel-steps-creation-page.png",
-      "/projects/stratos/funnelbuilder.png"
+      "/projects/stratos/funnelbuilder.png",
     ],
     github: "https://github.com/Manish6523/stratos---Agency-Website-Builder", // Inferred from template
     link: "https://stratospro.me", // Placeholder for live URL
@@ -298,9 +300,26 @@ export const PROJECTS: Project[] = [
 
 export const TIMELINE: TimelineEntry[] = [
   {
-    period: "2025 — 2025",
-    title: "Web Development Intern",
+    image: "/timeline/inamigos.png",
+    period: "June 2026 — July 2026",
+    title: "AI Web Development Intern",
+    company: "InAmigos Foundation",
+    tag:"Remote",
+    description:
+      "Exploring AI-powered website creation and UX analysis to support the foundation's digital presence, from rapid prototyping to feature design for NGO platforms.",
+    details: [
+      "Built a complete personal profile website using AI-driven website builders (Wix/WordPress), covering introduction, skills, and contact sections end-to-end.",
+      "Conducted a UX and design audit of the foundation's live website, annotating screenshots to flag improvement areas across layout, content, and usability.",
+      "Generated a full multi-section website (Home, About, Services, Contact) using an AI website generator to evaluate its viability for real-world foundation use.",
+      "Designed a Figma concept for an NGO website highlighting core features — donation flow, volunteer form, impact showcase, testimonials, and campaign/events sections.",
+    ],
+  },
+  {
+    image: "/timeline/karmadude.png",
+    period: "June 2025 — July 2025",
+    title: "Jr. React Developer",
     company: "Karmadude IT Solutions",
+    tag: "On-site",
     description:
       "Building web-based corporate gifting solutions and internal tools, focusing on stability, usability, and simple authentication flows.",
     details: [
@@ -311,13 +330,15 @@ export const TIMELINE: TimelineEntry[] = [
     ],
   },
   {
+    image: "/timeline/git.png",
     period: "2022 — 2026",
     title: "B. Tech in Computer Engineering",
     company: "Gandhinagar Institute of Technology",
+    tag: "On-campus",
     description:
       "Pursuing comprehensive education in computing, software engineering, and system design.",
     details: [
-      "Current CGPA: 8.26 / 10.0",
+      "Current CGPA: 8.70 / 10.0",
       "Focus Areas: Full-Stack Development, Distributed Systems, AI & ML.",
       "Active in technical events and open-source projects.",
       "Relevant Coursework: Data Structures & Algorithms, DBMS, Operating Systems, Machine Learning.",
