@@ -8,7 +8,7 @@ import {
   SiNextdotjs, SiTypescript, SiSupabase, SiPostgresql, 
   SiTailwindcss, SiFramer, SiMongodb, SiRedux, 
   SiJavascript, SiReact, SiHtml5, SiCss3, 
-  SiNodedotjs, SiExpress, SiGithub, SiDjango 
+  SiNodedotjs, SiExpress, SiGithub, SiDjango, SiPython
 } from 'react-icons/si';
 import Link from "next/link";
 
@@ -18,18 +18,20 @@ const CORE_STACK = [
   { name: "CSS3", icon: <SiCss3 />, category: "Styling", color: "text-blue-500", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
   { name: "JavaScript", icon: <SiJavascript />, category: "Logic", color: "text-yellow-400", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
   { name: "TypeScript", icon: <SiTypescript />, category: "Logic", color: "text-blue-400", href: "https://www.typescriptlang.org/" },
+  { name: "Python", icon: <SiPython />, category: "Logic", color: "text-blue-500", href: "https://python.org" },
   { name: "React.js", icon: <SiReact />, category: "Frontend", color: "text-cyan-400", href: "https://reactjs.org/" },
   { name: "Next.js 15", icon: <SiNextdotjs />, category: "Frontend", color: "text-white", href: "https://nextjs.org/" },
   { name: "Tailwind CSS", icon: <SiTailwindcss />, category: "Styling", color: "text-cyan-400", href: "https://tailwindcss.com/" },
   { name: "Redux Toolkit", icon: <SiRedux />, category: "State", color: "text-purple-500", href: "https://redux-toolkit.js.org/" },
   { name: "Node.js", icon: <SiNodedotjs />, category: "Backend", color: "text-green-500", href: "https://nodejs.org/" },
+  { name: "Django", icon: <SiDjango />, category: "Backend", color: "text-emerald-700", href: "https://djangoproject.com" },
   { name: "Express.js", icon: <SiExpress />, category: "Backend", color: "text-gray-400", href: "https://expressjs.com/" },
   { name: "Supabase", icon: <SiSupabase />, category: "Backend", color: "text-emerald-500", href: "https://supabase.com/" },
   { name: "PostgreSQL", icon: <SiPostgresql />, category: "Database", color: "text-blue-300", href: "https://www.postgresql.org/" },
   { name: "MongoDB", icon: <SiMongodb />, category: "Database", color: "text-green-500", href: "https://www.mongodb.com/" },
   { name: "Framer Motion", icon: <SiFramer />, category: "Motion", color: "text-pink-500", href: "https://www.framer.com/motion/" },
   { name: "GitHub", icon: <SiGithub />, category: "Version_Control", color: "text-white", href: "https://github.com/" },
-  { name: "Django", icon: <SiDjango />, category: "Backend", color: "text-emerald-700", href: "https://djangoproject.com" },
+  
 ];
 
 
@@ -131,7 +133,7 @@ export default function AboutManifest() {
               <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                 {CORE_STACK.map((tech, idx) => (
                   <Link href={tech?.href} target="_blank" key={idx} className="flex flex-col gap-2 p-4 border border-zinc-300 dark:border-zinc-900 bg-gray-50 dark:bg-zinc-950/30 hover:bg-gray-200 dark:hover:bg-zinc-900/50 transition-all group">
-                    <div className={`text-2xl dark:invert-0 invert dark:opacity-40 opacity-60 group-hover:opacity-100 transition-opacity ${tech.color}`}>
+                    <div className={`text-2xl dark:invert-0 invert dark:opacity-40 opacity-90 group-hover:opacity-100 transition-opacity ${tech.color}`}>
                       {tech.icon}
                     </div>
                     <div>
