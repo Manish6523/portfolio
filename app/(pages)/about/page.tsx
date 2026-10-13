@@ -8,7 +8,7 @@ import {
   SiNextdotjs, SiTypescript, SiSupabase, SiPostgresql, 
   SiTailwindcss, SiFramer, SiMongodb, SiRedux, 
   SiJavascript, SiReact, SiHtml5, SiCss3, 
-  SiNodedotjs, SiExpress, SiGithub 
+  SiNodedotjs, SiExpress, SiGithub, SiDjango 
 } from 'react-icons/si';
 import Link from "next/link";
 
@@ -29,6 +29,7 @@ const CORE_STACK = [
   { name: "MongoDB", icon: <SiMongodb />, category: "Database", color: "text-green-500", href: "https://www.mongodb.com/" },
   { name: "Framer Motion", icon: <SiFramer />, category: "Motion", color: "text-pink-500", href: "https://www.framer.com/motion/" },
   { name: "GitHub", icon: <SiGithub />, category: "Version_Control", color: "text-white", href: "https://github.com/" },
+  { name: "Django", icon: <SiDjango />, category: "Backend", color: "text-emerald-700", href: "https://djangoproject.com" },
 ];
 
 
